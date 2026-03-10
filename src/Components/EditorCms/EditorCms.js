@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useRef } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 
@@ -45,3 +46,51 @@ function EditorCms({ onChange = () => { }, height, question}) {
 }
 
 export default EditorCms
+=======
+import React, { useMemo } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+
+function EditorCms({ onChange = () => {}, height = 300, question = "" }) {
+
+  const modules = useMemo(() => ({
+    toolbar: [
+      [{ header: [1, 2, 3, false] }],
+      ["bold", "italic", "underline", "strike"],
+      [{ color: [] }, { background: [] }],
+      [{ list: "ordered" }, { list: "bullet" }],
+      ["link", "image"],
+      ["clean"],
+    ],
+  }), []);
+
+  const formats = [
+    "header",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "color",
+    "background",
+    "list",
+    "bullet",
+    "link",
+    "image",
+  ];
+
+  return (
+    <div style={{ marginBottom: "50px" }}>
+      <ReactQuill
+        theme="snow"
+        value={question || ""}
+        onChange={onChange}
+        modules={modules}
+        formats={formats}
+        style={{ height: height }}
+      />
+    </div>
+  );
+}
+
+export default EditorCms;
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)

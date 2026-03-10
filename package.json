@@ -18,8 +18,15 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+<<<<<<< HEAD
     "@tinymce/tinymce-react": "^4.3.0",
     "axios": "^1.2.0",
+=======
+    "ajv": "^6.14.0",
+    "ajv-keywords": "^3.5.2",
+    "axios": "^1.2.0",
+    "quill": "^2.0.3",
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)
     "react": "^18.2.0",
     "react-axios": "^2.0.6",
     "react-big-calendar": "^1.5.2",
@@ -30,6 +37,10 @@
     "react-hls-player": "^3.0.7",
     "react-multi-carousel": "^2.8.2",
     "react-player": "^2.11.0",
+<<<<<<< HEAD
+=======
+    "react-quill": "^2.0.0",
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",

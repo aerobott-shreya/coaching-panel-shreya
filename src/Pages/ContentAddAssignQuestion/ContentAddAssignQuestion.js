@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import Checkbox from '@mui/material/Checkbox';
 import { Button, Switch, TextField } from '@mui/material';
 import React, { useContext, useState, useEffect } from 'react'
@@ -77,16 +78,66 @@ function ContentAddAssignQuestion({access}) {
   const [questionType, setQuestionType] = useState(false);
   const [taxonomy, setTaxonomy] = useState([]);
   const [chapter, setChapter] = React.useState(null);
+=======
+
+import Checkbox from "@mui/material/Checkbox";
+import { Button, Switch, TextField } from "@mui/material";
+import React, { useContext, useState, useEffect } from "react";
+import EditorCms from "../../Components/EditorCms/EditorCms";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { api_token } from "../../Utils/Network";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+import styles from "./index.module.css";
+import NewAccord from "./NewAccord";
+import { checkEmptyObject } from "../../Utils/Utils";
+import EditIcon from "@mui/icons-material/Edit";
+import DialogBox from "../../Components/DialogBox/DialogBox";
+import InputField from "../../Components/Input/InputField";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+import Stack from "@mui/material/Stack";
+import { UserCredsContext } from "../../ContextApi/UserCredsContext/UserCredsContext";
+import Skeleton from "@mui/material/Skeleton";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+
+function ContentAddAssignQuestion({ access }) {
+
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const location = useLocation();
+
+  const { content_selection, tagList } = useContext(UserCredsContext);
+
+  const [questionList, setQuestionList] = useState([]);
+  const [currentQuestion, setCurrentQuestion] = useState([]);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [value, setValue] = useState(new Date());
+  const [questionType, setQuestionType] = useState(false);
+  const [show, setShow] = useState(true);
+
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)
   const [chapterObj, setChapterObj] = useState({
     title: "",
     description: "",
     total_marks: "",
+<<<<<<< HEAD
     chapter_id: "",
   });
+=======
+    chapter_id: ""
+  });
+
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)
   const [showDetail, setShowDetail] = useState({
     title: location?.state?.title,
     description: location?.state?.description,
     total_marks: location?.state?.total_marks,
+<<<<<<< HEAD
     duration: location?.state?.duration,
   })
 
@@ -122,10 +173,24 @@ function ContentAddAssignQuestion({access}) {
   //     })
   // }
 
+=======
+    duration: location?.state?.duration
+  });
+
+  useEffect(() => {
+    getQuestion();
+
+    setTimeout(() => {
+      setShow(false);
+    }, 2000);
+  }, []);
+
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)
   const getQuestion = () => {
     api_token
       .get(`cms/v1/assignment/${id}/`)
       .then((res) => {
+<<<<<<< HEAD
         // console.log(res.data.data);
         if (res.data.data.question.length > 0) {
           setQuestionList(res.data.data.question)
@@ -137,6 +202,17 @@ function ContentAddAssignQuestion({access}) {
 
   const CreateQuestion = () => {
     const data = {
+=======
+        if (res.data.data.question.length > 0) {
+          setQuestionList(res.data.data.question);
+        }
+      })
+      .catch(console.log);
+  };
+
+  const CreateQuestion = () => {
+    const newQuestion = {
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)
       tags_id: null,
       provider: 1,
       title: "",
@@ -146,6 +222,7 @@ function ContentAddAssignQuestion({access}) {
       negative_marks: 0,
       is_active: true,
       subjectives: "",
+<<<<<<< HEAD
       subjective_choices: [{
         solution: "",
       }],
@@ -173,11 +250,25 @@ function ContentAddAssignQuestion({access}) {
 
     // setQuestionList([...questionList, data]);
   }
+=======
+      subjective_choices: [{ solution: "" }],
+      objective_choices: [
+        { title: "", is_correct: false },
+        { title: "", is_correct: false },
+        { title: "", is_correct: false },
+        { title: "", is_correct: false }
+      ]
+    };
+
+    setCurrentQuestion([newQuestion]);
+  };
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)
 
   const handleChange = (event) => {
     setQuestionType(event.target.checked);
   };
 
+<<<<<<< HEAD
 
   const handleOptionExplain = (content, ds, value, index) => {
     ds.objective_choices.map((v, i) => {
@@ -211,6 +302,71 @@ function ContentAddAssignQuestion({access}) {
   const saveQuestion = () => {
     // setQuestionList([...questionList, ...currentQuestion]);(
     let data = [...currentQuestion];
+=======
+  const handleData = (e, index) => {
+    const { name, value } = e.target;
+
+    setCurrentQuestion(prev => {
+      const updated = [...prev];
+      updated[index] = {
+        ...updated[index],
+        [name]: value
+      };
+      return updated;
+    });
+  };
+
+  const handleDataChange = (content, index, name) => {
+    setCurrentQuestion(prev => {
+      const updated = [...prev];
+      updated[index] = {
+        ...updated[index],
+        [name]: content
+      };
+      return updated;
+    });
+  };
+
+  const handleOptionChange = (content, ds, value, index) => {
+    setCurrentQuestion(prev => {
+      const updated = [...prev];
+      updated[value].objective_choices[index] = {
+        ...updated[value].objective_choices[index],
+        title: content
+      };
+      return updated;
+    });
+  };
+
+  const handleCheckData = (e, ds, value, index) => {
+    setCurrentQuestion(prev => {
+      const updated = [...prev];
+
+      updated[value].objective_choices =
+        updated[value].objective_choices.map((opt, i) => ({
+          ...opt,
+          is_correct: i === index ? e.target.checked : false
+        }));
+
+      return updated;
+    });
+  };
+
+  const handleOptionExplain = (content, ds, value, index) => {
+    setCurrentQuestion(prev => {
+      const updated = [...prev];
+      updated[value].objective_choices[index] = {
+        ...updated[value].objective_choices[index],
+        solution: content
+      };
+      return updated;
+    });
+  };
+
+  const saveQuestion = () => {
+    let data = [...currentQuestion];
+
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)
     if (questionType) {
       data[0].question_type = 2;
       data[0].subjective_choices[0].solution = data[0].subjectives;
@@ -222,13 +378,19 @@ function ContentAddAssignQuestion({access}) {
       delete data[0].subjectives;
     }
 
+<<<<<<< HEAD
     console.log(data, "Datasssssssss")
 
     const checks = checkEmptyObject(data[0]);
+=======
+    const checks = checkEmptyObject(data[0]);
+
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)
     if (checks) {
       api_token
         .patch(`cms/v1/assignment/${id}/`, { question: data })
         .then((res) => {
+<<<<<<< HEAD
           // console.log(res.data.data);
           if (res.data.data) {
             setQuestionList(res.data.data.question)
@@ -375,10 +537,40 @@ function ContentAddAssignQuestion({access}) {
         </div>
 
       </div>
+=======
+          if (res.data.data) {
+            setQuestionList(res.data.data.question);
+            setCurrentQuestion([]);
+          }
+        })
+        .catch(console.log);
+    } else {
+      alert("Field should not be empty");
+    }
+  };
+
+  const arrowBack = () => {
+    navigate(`/dashboard/content/assignment/assignList`);
+  };
+
+  const hours = Math.floor(showDetail?.duration / 3600);
+  const minutes = Math.floor((showDetail?.duration % 3600) / 60);
+  const seconds = showDetail?.duration % 60;
+
+  return (
+    <div>
+
+      <div onClick={arrowBack} className={styles.backContainer}>
+        <ArrowBackIosIcon className={styles.arrows} />
+        <span className={styles.backbutton}>Back</span>
+      </div>
+
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)
       <div className={styles.TotalCount}>
         <div>
           <div className={styles.QuestionTitle}>
             <div className={styles.titles}>{showDetail?.title}</div>
+<<<<<<< HEAD
             <p> - {showDetail?.description}</p>
           </div>
           <div>Total Marks : {showDetail?.total_marks}</div>
@@ -577,3 +769,103 @@ function ContentAddAssignQuestion({access}) {
 }
 
 export default ContentAddAssignQuestion
+=======
+            <p>- {showDetail?.description}</p>
+          </div>
+          <div>Total Marks : {showDetail?.total_marks}</div>
+        </div>
+
+        <div>
+          <div style={{ textAlign: "right" }}>
+            {access?.updateAccess && (
+              <EditIcon onClick={() => setOpenDialog(true)} />
+            )}
+          </div>
+
+          <div style={{ fontSize: "19px" }}>
+            Duration: {`${hours}:${minutes}:${seconds}`}
+          </div>
+        </div>
+      </div>
+
+      <Stack spacing={1}>
+        {show ? (
+          <Skeleton variant="rounded" width={950} height={40} />
+        ) : (
+          questionList.map((v, i) => (
+            <NewAccord
+              key={i}
+              data={v}
+              index={i}
+              setQuestionList={setQuestionList}
+              id={id}
+              access={access}
+            />
+          ))
+        )}
+      </Stack>
+
+      {currentQuestion.map((v, i) => (
+        <div key={i} className={styles.mainBox}>
+
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <p>Objective</p>
+            <Switch checked={questionType} onChange={handleChange} />
+            <p>Subjective</p>
+          </div>
+
+          <TextField
+            label="Marks"
+            name="marks"
+            onChange={(e) => handleData(e, i)}
+          />
+
+          <p>Question Title</p>
+
+          <EditorCms
+            height={350}
+            onChange={(content) =>
+              handleDataChange(content, i, "title")
+            }
+          />
+
+          <Button
+            onClick={saveQuestion}
+            variant="contained"
+            style={{ margin: "20px" }}
+            disabled={!access.updateAccess}
+          >
+            Save Question
+          </Button>
+
+        </div>
+      ))}
+
+      <Button
+        onClick={CreateQuestion}
+        variant="contained"
+        style={{ marginTop: "20px" }}
+        disabled={!access.updateAccess}
+      >
+        Add Question
+      </Button>
+
+      <DialogBox
+        open={openDialog}
+        onClose={() => setOpenDialog(false)}
+      >
+        <h1>Update Details</h1>
+
+        <InputField
+          label="Title"
+          name="title"
+          value={chapterObj.title}
+        />
+      </DialogBox>
+
+    </div>
+  );
+}
+
+export default ContentAddAssignQuestion;
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)

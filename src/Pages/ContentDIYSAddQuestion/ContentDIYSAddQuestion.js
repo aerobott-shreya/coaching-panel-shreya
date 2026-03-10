@@ -1,9 +1,16 @@
 import Checkbox from "@mui/material/Checkbox";
+<<<<<<< HEAD
 import { Button, Switch, TextField } from "@mui/material";
 import React, { useContext, useState, useEffect } from "react";
 import EditorCms from "../../Components/EditorCms/EditorCms";
 import Accord from "./Accord";
 import { useLocation, useParams } from "react-router-dom";
+=======
+import { Button, TextField } from "@mui/material";
+import React, { useContext, useState, useEffect } from "react";
+import EditorCms from "../../Components/EditorCms/EditorCms";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)
 import { api_token } from "../../Utils/Network";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -14,7 +21,10 @@ import styles from "./index.module.css";
 import { checkEmptyObject } from "../../Utils/Utils";
 import NewAccord from "./NewAccord";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+<<<<<<< HEAD
 import { useNavigate } from "react-router-dom";
+=======
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)
 import EditIcon from "@mui/icons-material/Edit";
 import DialogBox from "../../Components/DialogBox/DialogBox";
 import InputField from "../../Components/Input/InputField";
@@ -26,6 +36,7 @@ import Stack from "@mui/material/Stack";
 import Skeleton from "@mui/material/Skeleton";
 
 function ContentDIYSAddQuestion({ access }) {
+<<<<<<< HEAD
   let navigate = useNavigate();
   const { id } = useParams();
   const location = useLocation();
@@ -34,6 +45,20 @@ function ContentDIYSAddQuestion({ access }) {
   const [value, setValue] = React.useState(new Date());
   const { sectionList, content_selection, tagList } =
     useContext(UserCredsContext);
+=======
+
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const location = useLocation();
+
+  const { content_selection, tagList } = useContext(UserCredsContext);
+
+  const [openDialog, setOpenDialog] = useState(false);
+  const [questionList, setQuestionList] = useState([]);
+  const [value, setValue] = useState(new Date());
+  const [show, setShow] = useState(true);
+
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)
   const [currentQuestion, setCurrentQuestion] = useState([
     {
       tags_id: null,
@@ -45,6 +70,7 @@ function ContentDIYSAddQuestion({ access }) {
       negative_marks: 0,
       is_active: true,
       subjectives: "",
+<<<<<<< HEAD
       subjective_choices: [
         {
           solution: "",
@@ -77,12 +103,31 @@ function ContentDIYSAddQuestion({ access }) {
     description: "",
     total_marks: "",
     // chapter_id: "",
+=======
+      subjective_choices: [{ solution: "" }],
+      objective_choices: [
+        { title: "", is_correct: false },
+        { title: "", is_correct: false },
+        { title: "", is_correct: false },
+        { title: "", is_correct: false }
+      ]
+    }
+  ]);
+
+  const [questionType, setQuestionType] = useState(true);
+
+  const [chapterObj, setChapterObj] = useState({
+    title: "",
+    description: "",
+    total_marks: ""
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)
   });
 
   const [showDetail, setShowDetail] = useState({
     title: location?.state?.title,
     description: location?.state?.description,
     total_marks: location?.state?.total_marks,
+<<<<<<< HEAD
     duration: location?.state?.time,
   });
   const [show, setShow] = useState(true);
@@ -112,16 +157,36 @@ function ContentDIYSAddQuestion({ access }) {
       });
   };
 
+=======
+    duration: location?.state?.time
+  });
+
+  useEffect(() => {
+    getQuestion();
+
+    const timer = setTimeout(() => {
+      setShow(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)
   const getQuestion = () => {
     api_token
       .get(`content/test_configuration/${id}/`)
       .then((res) => {
+<<<<<<< HEAD
         // console.log(res.data.data);
         if (res.data.data.questions.length > 0) {
+=======
+        if (res?.data?.data?.questions?.length > 0) {
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)
           setQuestionList(res.data.data.questions);
           setCurrentQuestion([]);
         }
       })
+<<<<<<< HEAD
       .catch((err) => console.log(err));
   };
   console.log(questionList, "bsgdysdehfdygkhlkdfjdf");
@@ -228,6 +293,52 @@ function ContentDIYSAddQuestion({ access }) {
 
     currentQuestion[i][name] = content;
     setCurrentQuestion([...currentQuestion]);
+=======
+      .catch(console.log);
+  };
+
+  const handleDataChange = (content, i, name) => {
+    const updated = [...currentQuestion];
+    updated[i][name] = content;
+    setCurrentQuestion(updated);
+  };
+
+  const handleOptionChange = (content, ds, value, index) => {
+    const updated = [...currentQuestion];
+    updated[value].objective_choices[index].title = content;
+    setCurrentQuestion(updated);
+  };
+
+  const handleOptionExplain = (content, ds, value, index) => {
+    const updated = [...currentQuestion];
+    updated[value].objective_choices[index].solution = content;
+    setCurrentQuestion(updated);
+  };
+
+  const handleCheckData = (e, ds, value, index) => {
+    const updated = [...currentQuestion];
+
+    const correctIndex = ds.objective_choices.findIndex(
+      (v) => v.is_correct === true
+    );
+
+    if (correctIndex !== -1) {
+      updated[value].objective_choices[correctIndex].is_correct = false;
+    }
+
+    updated[value].objective_choices[index].is_correct = e.target.checked;
+
+    setCurrentQuestion(updated);
+  };
+
+  const handleData = (e, i) => {
+    const { name, value } = e.target;
+
+    const updated = [...currentQuestion];
+    updated[i][name] = value;
+
+    setCurrentQuestion(updated);
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)
   };
 
   const handleDatas = (e) => {
@@ -235,6 +346,7 @@ function ContentDIYSAddQuestion({ access }) {
     setChapterObj({ ...chapterObj, [name]: value });
   };
 
+<<<<<<< HEAD
   const handleData = (e, i) => {
     const { name, value } = e.target;
 
@@ -247,16 +359,29 @@ function ContentDIYSAddQuestion({ access }) {
     setCurrentQuestion([...currentQuestion]);
   };
 
+=======
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)
   const backToPrevious = () => {
     navigate("/dashboard/content/doityourself/doityourselflist");
   };
 
+<<<<<<< HEAD
   const SubmitFile = () => {
     // debugger;
+=======
+  const handlepop = () => {
+    setOpenDialog(true);
+    setChapterObj(showDetail);
+  };
+
+  const SubmitFile = () => {
+
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)
     const hrs = value.$H;
     const mins = value.$m;
     const sec = value.$s;
 
+<<<<<<< HEAD
     const data = hrs * 60 * 60 + mins * 60 + sec;
     let time;
 
@@ -265,6 +390,9 @@ function ContentDIYSAddQuestion({ access }) {
     } else {
       time = chapterObj?.duration;
     }
+=======
+    const time = hrs * 3600 + mins * 60 + sec;
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)
 
     const finalData = {
       ...chapterObj,
@@ -272,6 +400,7 @@ function ContentDIYSAddQuestion({ access }) {
       provider: 1,
       subject_id: content_selection.subject,
       grade_id: content_selection.grade,
+<<<<<<< HEAD
       board_id: content_selection.board,
     };
 
@@ -325,6 +454,42 @@ function ContentDIYSAddQuestion({ access }) {
         <div>
           <span className={styles.backbutton}>Back</span>
         </div>
+=======
+      board_id: content_selection.board
+    };
+
+    if (!checkEmptyObject(finalData)) {
+      alert("Please Fill in Proper Detail");
+      return;
+    }
+
+    api_token
+      .patch(`cms/v1/test/${id}/`, finalData)
+      .then((res) => {
+        if (res.data.data) {
+          alert("Data Updated Successfully");
+          setOpenDialog(false);
+
+          const { title, total_marks, description, duration } = res.data.data;
+
+          setShowDetail({
+            title,
+            total_marks,
+            description,
+            duration
+          });
+        }
+      })
+      .catch(console.log);
+  };
+
+  return (
+    <div>
+
+      <div className={styles.backContainer} onClick={backToPrevious}>
+        <ArrowBackIosIcon className={styles.arrows} />
+        <span className={styles.backbutton}>Back</span>
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)
       </div>
 
       <div className={styles.TotalCount}>
@@ -335,16 +500,26 @@ function ContentDIYSAddQuestion({ access }) {
           </div>
           <div>Total Marks : {showDetail?.total_marks}</div>
         </div>
+<<<<<<< HEAD
         <div>
           <div style={{ textAlign: "right" }}>
             {access?.updateAccess && <EditIcon onClick={() => handlepop()} />}
           </div>
           <div style={{ fontSize: "19px" }}>
             {/* Duration: {`${hours}:${minutes}:${remainingSeconds}`} */}
+=======
+
+        <div>
+          <div style={{ textAlign: "right" }}>
+            {access?.updateAccess && <EditIcon onClick={handlepop} />}
+          </div>
+          <div style={{ fontSize: "19px" }}>
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)
             Duration: {showDetail?.duration}
           </div>
         </div>
       </div>
+<<<<<<< HEAD
       {/* <div style={{ textAlign: 'right' }}>
         <Button className={styles.btns}>Assign To</Button>
       </div> */}
@@ -354,11 +529,14 @@ function ContentDIYSAddQuestion({ access }) {
           <NewAccord data={v} index={i} setQuestionList={setQuestionList} id={id} />
         ))
       } */}
+=======
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)
 
       <Stack spacing={1}>
         {show ? (
           <Skeleton variant="rounded" width={950} height={40} />
         ) : (
+<<<<<<< HEAD
           questionList.length &&
           [...questionList]
             // .reverse()
@@ -536,18 +714,42 @@ function ContentDIYSAddQuestion({ access }) {
       {questionList.length <= 0 && <p>No Question</p>}
 
       {/* <Button onClick={() => CreateQuestion()} variant="contained" style={{marginTop: '20px'}} disabled={!access?.writeAccess}>Add Question</Button> */}
+=======
+          questionList.map((v, i) => (
+            <NewAccord
+              key={v.id || i}
+              data={v}
+              index={i}
+              setQuestionList={setQuestionList}
+              id={id}
+              access={access}
+            />
+          ))
+        )}
+      </Stack>
+
+      {currentQuestion.length === 0 && <p>No Question</p>}
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)
 
       <DialogBox
         open={openDialog}
         onClose={() => setOpenDialog(false)}
+<<<<<<< HEAD
         dataSend={() => SubmitFile()}
       >
         <h1>Update Details</h1>
+=======
+        dataSend={SubmitFile}
+      >
+        <h1>Update Details</h1>
+
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)
         <div className={styles.inputbox}>
           <InputField
             label="Title"
             name="title"
             width="100%"
+<<<<<<< HEAD
             size="md"
             value={chapterObj.title}
             onChange={handleDatas}
@@ -557,6 +759,16 @@ function ContentDIYSAddQuestion({ access }) {
         <div className={styles.inputbox}>
           <InputField
             multiline={true}
+=======
+            value={chapterObj.title}
+            onChange={handleDatas}
+          />
+        </div>
+
+        <div className={styles.inputbox}>
+          <InputField
+            multiline
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)
             rows={5}
             label="Description"
             width="100%"
@@ -565,6 +777,7 @@ function ContentDIYSAddQuestion({ access }) {
             onChange={handleDatas}
           />
         </div>
+<<<<<<< HEAD
         {/* <div className={styles.inputbox}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Chapter</InputLabel>
@@ -580,11 +793,17 @@ function ContentDIYSAddQuestion({ access }) {
           </FormControl>
         </div> */}
         <div className={styles.flex_content}>
+=======
+
+        <div className={styles.flex_content}>
+
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)
           <div className={styles.inputbox} style={{ width: "50%" }}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <Stack spacing={3}>
                 <TimePicker
                   ampm={false}
+<<<<<<< HEAD
                   openTo="hours"
                   views={["hours", "minutes", "seconds"]}
                   inputFormat="HH:mm:ss"
@@ -595,11 +814,18 @@ function ContentDIYSAddQuestion({ access }) {
                     console.log(newValue, "NNNNNNNN");
                     setValue(newValue);
                   }}
+=======
+                  views={["hours", "minutes", "seconds"]}
+                  label="Assignment seconds"
+                  value={value}
+                  onChange={(newValue) => setValue(newValue)}
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)
                   renderInput={(params) => <TextField {...params} />}
                 />
               </Stack>
             </LocalizationProvider>
           </div>
+<<<<<<< HEAD
           <div className={styles.inputbox} style={{ width: "50%" }}>
             <InputField
               label="Total Marks"
@@ -612,8 +838,28 @@ function ContentDIYSAddQuestion({ access }) {
           </div>
         </div>
       </DialogBox>
+=======
+
+          <div className={styles.inputbox} style={{ width: "50%" }}>
+            <InputField
+              label="Total Marks"
+              name="total_marks"
+              value={chapterObj.total_marks}
+              onChange={handleDatas}
+            />
+          </div>
+
+        </div>
+
+      </DialogBox>
+
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)
     </div>
   );
 }
 
+<<<<<<< HEAD
 export default ContentDIYSAddQuestion;
+=======
+export default ContentDIYSAddQuestion;
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)

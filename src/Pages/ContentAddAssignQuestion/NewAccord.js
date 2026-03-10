@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect, useContext } from 'react'
 import { Button, Checkbox, Switch, TextField } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
@@ -336,3 +337,356 @@ function NewAccord({ access, data, index, setQuestionList = () => { }, id }) {
 }
 
 export default NewAccord
+=======
+import React, { useState, useEffect, useContext } from "react";
+import { Button, Checkbox, Switch, TextField } from "@mui/material";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import EditorCms from "../../Components/EditorCms/EditorCms";
+import { api_token } from "../../Utils/Network";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+import styles from "./index.module.css";
+import { UserCredsContext } from "../../ContextApi/UserCredsContext/UserCredsContext";
+
+function NewAccord({ access, data, index, setQuestionList = () => {}, id }) {
+
+  const [newbox, setNkewData] = useState({
+    tags_id: data?.tags?.id || null,
+    provider: 1,
+    title: "",
+    marks: "",
+    complexity: null,
+    question_type: "1",
+    negative_marks: 0,
+    is_active: true,
+    subjective_choices: [
+      {
+        solution: "",
+      },
+    ],
+    objective_choices: [
+      { title: "", is_correct: false },
+      { title: "", is_correct: false },
+      { title: "", is_correct: false },
+      { title: "", is_correct: false },
+    ],
+  });
+
+  const [questionType, setQuestionType] = useState(false);
+  const [expanded, setExpanded] = useState(true);
+
+  const { tagList } = useContext(UserCredsContext);
+
+  useEffect(() => {
+    setNkewData((prev) => ({ ...prev, ...data }));
+
+    if (data.question_type === 2) {
+      setQuestionType(true);
+    }
+  }, []);
+
+  const handleChange = (event) => {
+    if (event.target.checked === false) {
+      setNkewData((prev) => ({
+        ...prev,
+        objective_choices: [
+          { title: "", is_correct: false },
+          { title: "", is_correct: false },
+          { title: "", is_correct: false },
+          { title: "", is_correct: false },
+        ],
+      }));
+    }
+
+    setQuestionType(event.target.checked);
+  };
+
+  const handleData = (e) => {
+    const { name, value } = e.target;
+
+    setNkewData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleDataChange = (content, name) => {
+    setNkewData((prev) => {
+      const updated = { ...prev };
+
+      if (name === "subjective_choices") {
+        updated.subjective_choices[0].solution = content;
+      } else {
+        updated[name] = content;
+      }
+
+      return updated;
+    });
+  };
+
+  const handleCheckData = (e, ds, j) => {
+    const updated = { ...newbox };
+
+    const correctIndex = updated.objective_choices.findIndex(
+      (v) => v.is_correct === true
+    );
+
+    if (correctIndex !== -1) {
+      updated.objective_choices[correctIndex].is_correct = false;
+    }
+
+    updated.objective_choices[j].is_correct = e.target.checked;
+
+    setNkewData(updated);
+  };
+
+  const handleOptionChange = (content, index) => {
+    setNkewData((prev) => {
+      const updated = { ...prev };
+      updated.objective_choices[index].title = content;
+      return updated;
+    });
+  };
+
+  const handleOptionExplain = (content, ds, index) => {
+    setNkewData((prev) => {
+      const updated = { ...prev };
+      updated.objective_choices[index].solution = content;
+      return updated;
+    });
+  };
+
+  const submitData = () => {
+    let payload = [{ ...newbox }];
+
+    if (questionType) {
+      payload[0].question_type = 2;
+      delete payload[0].objective_choices;
+    } else {
+      payload[0].question_type = 1;
+      delete payload[0].subjective_choices;
+    }
+
+    api_token
+      .patch(`cms/v1/assignment/${id}/`, { question: payload })
+      .then((res) => {
+        if (res.data.data) {
+          setQuestionList(res.data.data.question);
+          alert("Question Updated Successfully");
+          setExpanded(false);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
+  return (
+    <div>
+      <Accordion sx={{ marginBottom: "10px" }}>
+        <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
+          <Typography>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <div
+                className={styles.tableQuestion}
+                style={{ display: "flex", alignItems: "flex-start" }}
+              >
+                <div style={{ margin: "3px", fontWeight: "bold" }}>
+                  {`Question ${index + 1} : `}
+                </div>
+
+                <div
+                  dangerouslySetInnerHTML={{ __html: data?.title }}
+                  className={styles.modules}
+                />
+              </div>
+
+              <div style={{ display: "flex", marginLeft: "30px" }}>
+                <div style={{ marginRight: "30px", whiteSpace: "nowrap" }}>
+                  Marks: {data?.marks}
+                </div>
+
+                <div style={{ marginRight: "30px", whiteSpace: "nowrap" }}>
+                  Negative Marks: {data?.negative_marks}
+                </div>
+
+                <div style={{ marginRight: "30px", whiteSpace: "nowrap" }}>
+                  Taxonomy: {data?.tags?.title}
+                </div>
+
+                <div style={{ marginRight: "30px", whiteSpace: "nowrap" }}>
+                  Difficulty Level:
+                  {data.complexity === 1
+                    ? "easy"
+                    : data.complexity === 2
+                    ? "medium"
+                    : "hard"}
+                </div>
+              </div>
+            </div>
+          </Typography>
+        </AccordionSummary>
+
+        <AccordionDetails>
+          <Typography>
+            <div>
+
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <p>Objective</p>
+
+                <Switch
+                  checked={questionType}
+                  onChange={handleChange}
+                />
+
+                <p>Subjective</p>
+              </div>
+
+              <div style={{ display: "flex" }}>
+                <div style={{ marginRight: "20px" }}>
+                  <TextField
+                    label="Marks"
+                    name="marks"
+                    value={newbox?.marks}
+                    onChange={handleData}
+                  />
+                </div>
+
+                <div>
+                  <TextField
+                    label="Negative marks"
+                    name="negative_marks"
+                    value={newbox?.negative_marks}
+                    onChange={handleData}
+                  />
+                </div>
+
+                <div style={{ margin: "0 30px" }}>
+                  <FormControl>
+                    <FormLabel>Difficulty Level</FormLabel>
+
+                    <RadioGroup
+                      row
+                      name="complexity"
+                      value={newbox?.complexity}
+                      onChange={handleData}
+                    >
+                      <FormControlLabel value="1" control={<Radio />} label="Easy" />
+                      <FormControlLabel value="2" control={<Radio />} label="Medium" />
+                      <FormControlLabel value="3" control={<Radio />} label="Hard" />
+                    </RadioGroup>
+                  </FormControl>
+                </div>
+              </div>
+
+              <div>
+                <FormControl>
+                  <FormLabel>Taxonomy</FormLabel>
+
+                  <RadioGroup
+                    row
+                    name="tags_id"
+                    value={`${newbox?.tags_id}`}
+                    onChange={handleData}
+                  >
+                    {tagList &&
+                      tagList.map((v) => (
+                        <FormControlLabel
+                          key={v.id}
+                          value={`${v.id}`}
+                          control={<Radio />}
+                          label={v.title}
+                        />
+                      ))}
+                  </RadioGroup>
+                </FormControl>
+              </div>
+
+              <p>Question Title</p>
+
+              <EditorCms
+                height={500}
+                question={newbox?.title}
+                onChange={(content) =>
+                  handleDataChange(content, "title")
+                }
+              />
+
+              {questionType ? (
+                <>
+                  <p>Answer</p>
+
+                  <EditorCms
+                    height={250}
+                    question={newbox.subjective_choices[0]?.solution}
+                    onChange={(content) =>
+                      handleDataChange(content, "subjective_choices")
+                    }
+                  />
+                </>
+              ) : (
+                <>
+                  {newbox?.objective_choices?.map((content, j) => (
+                    <div key={j}>
+
+                      <p>
+                        Option {j + 1}
+
+                        <Checkbox
+                          checked={content.is_correct}
+                          onChange={(e) =>
+                            handleCheckData(e, newbox, j)
+                          }
+                        />
+                      </p>
+
+                      <EditorCms
+                        height={300}
+                        question={content.title}
+                        onChange={(content) =>
+                          handleOptionChange(content, j)
+                        }
+                      />
+
+                      {content.is_correct && (
+                        <>
+                          <p>Explanation</p>
+
+                          <EditorCms
+                            height={250}
+                            question={content.solution}
+                            onChange={(content) =>
+                              handleOptionExplain(content, newbox, j)
+                            }
+                          />
+                        </>
+                      )}
+
+                    </div>
+                  ))}
+                </>
+              )}
+
+              <Button
+                onClick={submitData}
+                variant="contained"
+                style={{ margin: "20px" }}
+                disabled={!access.updateAccess}
+              >
+                Save Question
+              </Button>
+
+            </div>
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+    </div>
+  );
+}
+
+export default NewAccord;
+>>>>>>> 1aa4e79 (Replace TinyMCE with Quill editor)

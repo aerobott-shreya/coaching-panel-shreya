@@ -1,0 +1,76 @@
+.mainContainer {}
+
+.dateContainer {
+  display: flex;
+  gap: 40px
+}
+
+.progressContainer {
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.infoCon>p {
+  margin: 0px;
+}
+
+.text {
+  font-weight: 500;
+}
+
+.nos {
+  text-align: end;
+  font-weight: 600;
+  font-size: 27px;
+  padding-right: 10px;
+}
+
+.reactCalender {
+  width: 100% !important;
+  border: none !important;
+}
+
+.present_date {
+  background-color: #1ae11a61;
+  color: white;  
+  text-align: center;
+  width: 40px;
+  height: 95%;
+  z-index: 0;
+  border-radius: 50%;
+  top: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+.absent_date {
+  background-color: #e1311a61;
+  color: white;
+  text-align: center;
+  width: 40px;
+  height: 95%;
+  z-index: 0;
+  border-radius: 50%;
+  top: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+
+.hide_selected_color .react-calendar__tile--active {
+  background-color: transparent;
+}
+
+.react-calendar button {
+  position: relative !important;
+}
+
+.react-calendar__tile .active {
+  background-color: white !important;
+}

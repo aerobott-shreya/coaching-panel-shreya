@@ -1,0 +1,105 @@
+.container {
+    /* border: 1px solid red; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* topbarstyles */
+  
+  .center {
+    /* border: 1px solid coral; */
+    height: auto;
+    padding: 30px;
+  }
+  
+  .centerMain {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .chartBox {
+    /* border: 1px solid black; */
+    padding: 10px;
+    width: 50%;
+  }
+  
+  .chartMain {
+    /* width: 95%; */
+    /* border: 1px solid black; */
+    margin: auto;
+  }
+  
+  .dailyCalender {
+    /* border: 1px solid firebrick; */
+    padding: 10px;
+    width: 100%;
+  }
+  
+  .titleBar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .dailyCardBox{
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 48px;
+  }
+  
+  .dailyCard{
+    /* border: 1px solid black; */
+    padding: 15px;
+    display: flex;
+    height:80px;
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: #fff;
+    cursor: pointer;
+  
+  }
+  
+  .cardDescription{
+    display: flex;
+    flex-direction: column;
+    padding-left: 15px;
+  }
+  
+  
+  
+  .bottomSection {
+    /* border: 1px solid rgb(0, 248, 174); */
+    height: auto;
+    padding: 30px;
+  }
+  
+  .bottomSectionMain{
+    display: flex;
+    flex-direction: row;
+  
+  }
+  
+  .pendingFees{
+    /* border: 1px solid black; */
+    width: 50%;
+    padding: 10px;
+  
+  }
+  
+  .eventCalender{
+    /* border: 1px solid saddlebrown; */
+    width: 50%;
+    padding: 10px;
+  
+  }
+
+  /* globals */
+
+.font20{
+  font-size: 20px;
+}
+  

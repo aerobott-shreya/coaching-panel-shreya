@@ -1,0 +1,11 @@
+.filterBox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.tableContainer {
+  width: 100%;
+}

@@ -1,0 +1,25 @@
+.react-calendar button{
+    position: relative !important;
+}
+
+.react-calendar{
+    width: 100% !important;
+}
+
+/* this is PPT View  slider css */
+
+/* .carousel .control-prev.control-arrow {
+    left: -17px !important;
+    background-color: #000 !important;
+    padding: 10px 10px 5px 5px;
+    border-radius: 20px;
+    margin-top: -20px;
+}
+
+.carousel .control-next.control-arrow {
+    right: -15px !important;
+    background-color: #000 !important;
+    padding: 10px 5px 5px 10px;
+    border-radius: 20px;
+    margin-top: -20px;
+} */

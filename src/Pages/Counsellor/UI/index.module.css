@@ -1,0 +1,29 @@
+.live_main{
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 2px 2px 5px grey;
+    border-radius: 12px;
+    width: 300px;
+}
+
+.mb{
+    margin-bottom: 20px;
+}
+.side_box{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.session_con{
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 1px 2px 10px grey;
+    border-radius: 12px;
+}
+
+.box_content_cc{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}

@@ -1,0 +1,90 @@
+.boardMain {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.flexData {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.subjectCss {
+    width: 35%;
+}
+
+.gradeList {
+    padding: 10px;
+    margin-bottom: 20px;
+    background: #FBFBFB;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+.widthContainer {
+    width: 80%;
+    margin-bottom: 50px;
+    flex-wrap: nowrap;
+}
+
+.boxSize {
+    width: 47%;
+    box-sizing: border-box;
+}
+
+.fontData {
+    font-size: 28px;
+    margin: 10px 0;
+}
+
+.scaleSub {
+    transform: scale(1.1);
+}
+
+
+
+.boardContainer {
+    width: 210px;
+    padding: 10px 20px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px rgb(0 0 0 / 30%);
+    border-radius: 6px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 20px;
+    margin: 0 10px;
+}
+
+.boardContainerBg {
+    background-color: #216E91;
+    color: white;
+}
+
+.subjectBox {
+    display: flex;
+    padding: 14px;
+    width: 47%;
+    justify-content: center;
+    border-radius: 12px;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+    font-size: 22px;
+    color: white;
+    cursor: pointer;
+}
+
+.boxGradeList {
+    padding: 30px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+}
+
+.gradeCircle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}

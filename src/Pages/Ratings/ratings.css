@@ -1,0 +1,86 @@
+.ratings-topdiv {
+    display:flex;
+}
+
+.ratings-stardiv{
+    display:flex;
+}
+
+.ratings-thumbs{
+    display: flex;
+}
+
+.ratings-rating{
+    font-size:64px;
+    font-weight:100;
+    margin-top:-5px;
+    margin-bottom:0px;
+    text-align: center;
+}
+
+.ratings-bar{
+    width:300 !important;
+    height:150 !important;
+}
+
+.ratings-reply-button {
+    display: grid;
+    grid-template-columns: 8% 8%;
+    grid-gap:8px;
+}
+/* .ratings-thumbs{
+    display: -webkit-inline-box;
+} */
+
+/* 
+.sidenav {
+    width: 130px;
+    position: fixed;
+    z-index: 1;
+    top: 20px;
+    left: 10px;
+    background: #eee;
+    overflow-x: hidden;
+    padding: 8px 0;
+  }
+  
+  .sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #2196F3;
+    display: block;
+  }
+  
+  .sidenav a:hover {
+    color: #064579;
+  } */
+
+  .bar-container {
+    width: 100%;
+   
+    text-align: center;
+    color: white;
+    margin-top:5px;
+  }
+  
+  .bar-5 {width: 60%; height: 20px; background-color: #57bb8a;}
+  .bar-4 {width: 30%; height: 20px; background-color: #9ace6a;}
+  .bar-3 {width: 10%; height: 20px; background-color: #ffcf02;}
+  .bar-2 {width: 4%; height: 20px; background-color: #ff9f02;}
+  .bar-1 {width: 15%; height: 20px; background-color: #ff6f31;}
+
+  .review-avatar{
+      display:flex ;
+      
+      padding:20px;
+  }
+
+  .review-avatar2{
+      display: flex;
+  }
+
+  .MuiBox-root{
+      padding-top: 0px!important;
+      margin-top: 0px!important;
+  }

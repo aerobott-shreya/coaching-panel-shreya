@@ -1,0 +1,132 @@
+::-webkit-scrollbar {
+  /* display: none; */
+}
+
+.Container{
+  overflow: hidden;
+}
+
+.head{
+  font-size: 25px;
+}
+
+.btns{
+  margin-top: 20px !important;
+}
+
+.headerTitle {
+  display: flex;
+}
+
+.title {
+
+  font-weight: 500;
+  font-size: 20px;
+  color: #484848;
+}
+
+.videotext {
+  color: #484848;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+
+.buttonCon{
+display: flex;
+gap: 20px;
+
+
+}
+
+.uploadVideo{
+padding: 18px 22px; 
+border : none;
+border-radius: 10px;
+font-weight: 500;
+color: #fff;
+
+}
+
+
+.bulkUpload{
+background: #FFFFFF;
+border: 1px solid #216E91;
+border-radius: 10px;
+padding : 18px 22px;
+}
+
+
+
+.videoTitle{
+ color: #484848;
+ font-size : 20px;
+ margin-top:10px
+}
+
+.mainVideoContainer{
+  display: flex;
+}
+
+
+.buttonCon{
+    margin-bottom:20px;
+}
+
+.videoContainer{
+    margin-top:40px
+}
+
+.cardMain{
+  width: 100%;
+  margin: 10px;
+  position: relative;
+  box-shadow: 2px 0px 4px 0px #bfb0b0;
+  border-radius: 12px;
+  cursor: pointer;
+  overflow: hidden;
+  background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 273px;
+}
+
+.imgCard{
+  width: 100%;
+}
+
+.customProgress{
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+.marginBottom{
+  margin-bottom: 20px;
+}
+
+.imgLogo{
+  position: absolute;
+  right: 14px;
+  top: 10px;
+  width: 35px;
+}
+
+.circleGrey{
+  background-color: #484848;
+  text-align: center;
+  padding: 5px;
+  margin-bottom: 3px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.topics{
+  font-size: 16px;
+    /* margin-bottom: 10px; */
+    font-weight: 700;
+    width: 100%;
+    color: white;
+    padding: 47px 10px 32px;
+    background-image: linear-gradient(#ffffff00, #000000e0);
+}

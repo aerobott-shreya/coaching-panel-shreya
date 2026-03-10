@@ -1,0 +1,10 @@
+.mainPending{
+    border: 1px solid #bdb3b3;
+    padding: 10px;
+    border-radius: 13px;
+}
+
+
+.mainContainer{
+    padding: 20px;
+}

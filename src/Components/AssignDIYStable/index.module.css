@@ -1,0 +1,120 @@
+.done {
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 11.72px;
+    color: #046302;
+    background-color: #a0ec9f82;
+    padding: 5px 20px;
+    border-radius: 50px;
+  }
+  .check {
+    color: #ffffff;
+    background-color: #13868b;
+    border-radius: 6px;
+  
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14.06px;
+    padding: 5px 20px;
+  }
+  .Submitted {
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 10px;
+    color: #046302;
+    background-color: #a0ec9f82;
+    border-radius: 100px;
+    padding: 10px 20px;
+  }
+  .not {
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 10px;
+    color: #c43c30;
+    background-color: #fcb9b0;
+    padding: 10px 20px;
+    border-radius: 100px;
+  }
+  .tableHeader {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.41px;
+    color: #032c6b;
+  }
+  
+  
+  /* popup styles */
+  
+  .studentinfo{
+    width: 60%;
+    margin: 0 auto;
+    box-shadow: 0px 4px 12px 0px #0000001A;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .markstable{
+    width: 70%;
+    margin: 0 auto;
+  
+    & table{
+      margin: 40px auto;
+      border-spacing: 0;
+      width: 100%;
+      border-radius: 25px;
+      /* overflow: hidden; */
+      /* border: 1px solid #E9E9E9; */
+      & td{
+        border: 1px solid #E9E9E9;
+        padding: 10px;
+        box-sizing: border-box;
+        
+      }
+    }
+  }
+  .heading{
+    background-color: #13868B;
+    color: #fff;
+    height: 55px;
+    & td{
+      /* border-color: #fff !important; */
+      /* border-radius: 25px 25px 0 0; */
+    }
+  
+  }
+  .questionbody{
+    width: 40%;
+  }
+  .marksbody{
+    width: 10%;
+  }
+  
+  .qmarksbody{
+    text-align: center;
+    width: 10%;
+  }
+
+  .pending{
+    background-color: #FFB64D;
+    color: #000;
+    border-radius: 25px;
+    text-align: center;
+  }
+
+  .submitbuton{
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .finishbtn{
+    background-color: #15838C !important;
+  }
+
+  .CloseBtn{
+    text-align: right;
+    padding: 30px;
+  }

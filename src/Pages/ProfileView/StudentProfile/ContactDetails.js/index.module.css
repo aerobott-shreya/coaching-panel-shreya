@@ -1,0 +1,29 @@
+
+.mainContainer{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 60px;
+}
+
+
+.teacherMain{
+    display: flex;
+    padding: 20px;
+    width: 47%;
+    margin: 10px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px rgb(0 0 0 / 25%);
+    border-radius: 10px;
+}
+
+.image{
+    width: 40px;
+    margin: 10px;
+}
+
+.title{
+    color: #216E91;
+    margin: 0;
+    font-size: 19px;
+    font-weight: 900;
+}

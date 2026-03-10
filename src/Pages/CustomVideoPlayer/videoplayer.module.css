@@ -1,0 +1,48 @@
+.container {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  /* border: 1px solid black; */
+}
+
+.videoBox {
+  width: 70%;
+}
+
+.arrows{
+  color: #216E91;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.nextVideoBox {
+  width: 30%;
+}
+
+.videoCard {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.videoImgCard {
+  width: 100%;
+}
+
+.topicData{
+  display: flex;
+  font-size: 24px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.selectData{
+  width: 75%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  margin-top: -75px;
+  z-index: 9999;
+  position: relative;
+}

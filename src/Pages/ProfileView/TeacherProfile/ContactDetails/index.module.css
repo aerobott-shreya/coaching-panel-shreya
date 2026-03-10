@@ -1,0 +1,60 @@
+.mainContainer {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 160px;
+}
+
+
+.teacherMain {
+    
+    padding: 20px 10px;
+    /* width: 47%;
+    margin: 10px; */
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px rgb(0 0 0 / 25%);
+    border-radius: 10px;
+    height: 100%;
+}
+
+.innerMainBox{
+    display: flex;
+}
+
+.image {
+    width: 40px;
+    margin: 10px 20px;
+}
+
+.title {
+    color: #216E91;
+    margin: 0;
+    font-size: 16px;
+    font-weight: 900;
+}
+
+.AddandeditCon {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.rightInfocon {
+    display: flex;
+    width: 23%;
+    margin: 20px 20px 44px;
+  }
+  
+  
+  .textField1,
+  .textField2,
+  .textField3 {
+    display: flex;
+    width: 420px;
+    margin: 10px;
+    justify-content: space-between;
+  }
+  
+  .textField {
+    margin: 12px;
+    width: 200px
+  }

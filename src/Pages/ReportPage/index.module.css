@@ -1,0 +1,300 @@
+.courselistingcontainer {
+  display: flex;
+  gap: 20px;
+}
+
+.courseContainer {
+  /* width: 150px; */
+  box-sizing: border-box;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.courseimgContainer{
+  width: 83px;
+
+  & img {
+    width: 100%;
+  }
+}
+
+.perfSection{
+  margin: 20px 0;
+ 
+}
+
+.courseSelect {
+  border: 1px solid #a8d5d5;
+  box-sizing: border-box;
+  border-radius: 15px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.sectionListingContainer {
+  margin-top: 30px;
+  display: flex;
+
+  gap: 20px;
+}
+.sectionContainer {
+  cursor: pointer;
+  font-size: 25px;
+}
+.sectionSelect {
+  border-bottom: 3px solid #032c6b;
+  color: #032c6b;
+  font-weight: 600;
+}
+
+.performanceSection {
+  display: flex;
+  justify-content: space-between;
+}
+
+.studentPerformance {
+  width: 30%;
+}
+
+.overallprogress {
+  padding: 20px;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+.difflevelwiseProgress {
+  padding: 10px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.showprogresstext {
+  display: flex;
+  justify-content: space-between;
+}
+
+.overAllperformance {
+  width: 65%;
+}
+
+.classPerformance {
+  width: 100%;
+  height: 400px;
+  border: 1px solid #DFDFDF;
+  border-radius: 25px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.curriculumPrograms {
+  margin-top: 60px;
+}
+.curriculumProgramsInner {
+  display: flex;
+  justify-content: space-between;
+}
+.overallprogress {
+  /* width: 40%; */
+  margin: 0 auto;
+}
+
+.subjectProgress {
+  width: 60%;
+  height: 300px;
+  overflow-y: scroll;
+  /* overflow: scroll; */
+}
+
+/* Define the scrollbar style */
+.container::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+/* Define the thumb style */
+.subjectProgress::-webkit-scrollbar-thumb {
+  background: #4d7fff;
+  border-radius: 5px;
+}
+/* Define the track style */
+.subjectProgress::-webkit-scrollbar-track {
+  background-color: #ddd;
+  border: 1px solid #ccc;
+}
+/* Define the button style */
+.subjectProgress::-webkit-scrollbar-button {
+  background-color: #4d7fff;
+  border-radius: 5px;
+}
+/* Define the button style when being hovered over */
+.subjectProgress::-webkit-scrollbar-button:hover {
+  background-color: #999999;
+}
+
+
+
+/* Table design */
+.tableContainer {
+  display: flex;
+  justify-content: space-between;
+}
+.mainTable {
+  width: 30%;
+  padding: 20px;
+  /* overflow-y: scroll; */
+  color: #fff;
+  border-radius: 20px;
+
+  & h2 {
+    border-bottom: 1px solid #fff ;
+  }
+}
+.gradianlow {
+  /* background: linear-gradient(
+    180deg,
+    rgba(248, 8, 17, 1) 0%,
+    rgba(238, 9, 121, 1) 50%
+  ); */
+  background: linear-gradient(180deg, #93291E 0%, #ED213A 100%);
+
+}
+
+.gradianavg {
+  /* background: linear-gradient(
+    180deg,
+    rgba(255, 158, 0, 1) 0%,
+    rgba(255, 184, 0, 1) 50%
+  ); */
+  background: linear-gradient(180deg, #FC4A1A 0%, #F7B733 100%);
+
+}
+
+.gradianhigh {
+  /* background: linear-gradient(
+    180deg,
+    rgba(105, 217, 109, 1) 0%,
+    rgba(15, 188, 0, 1) 50%
+  ); */
+  background: linear-gradient(180deg, #1A3C10 0%, #52C234 100%);
+
+}
+.mainListing {
+  padding: 10px;
+  /* width: 30%; */
+
+  & li {
+    padding: 10px 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #fff;
+   
+
+    & .numberShow {
+      width: 35%;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    & .nameShow {
+      width: 55%;
+      color: #fff;
+      text-transform: capitalize;
+      font-size: 18px;
+      font-weight: 700;
+    }
+  }
+}
+
+.nameandLegend{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.Legend{
+  display: flex;
+  gap: 40px;
+  margin-right: 35px;
+
+  & span {
+    position: relative;
+    font-size:20px;
+    font-weight: 700;
+  }
+
+  & span::after{
+    content: " ";
+    left: -15px;
+    top: 14px;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    /* background-color: #000; */
+  }
+}
+.doit{
+  color: #FF6969;
+
+}
+
+.doit::after{
+  background-color:  #FF6969;
+}
+
+.mcq{
+  color: #FBA834;
+}
+.mcq::after{
+  background-color:  #FBA834;
+}
+
+.worksheet{
+  color: #615EFC;
+}
+
+.worksheet::after{
+  background-color:  #615EFC;
+}
+
+.donutsContainer{
+  display: flex;
+  /* gap: 20px; */
+  justify-content: space-between;
+}
+
+.leftside{
+  width: 30%;
+  text-align: center;
+}
+
+.rightside{
+  width: 60%;
+  text-align: center;
+  /* display: flex; */
+}
+
+.curriculum{
+  display: flex;
+  justify-content: space-between;
+}
+
+.curriculum::after{
+  content: "";
+  top: 0;
+  width: 1px;
+  height: 100%;
+  /* background-color: ; */
+}
+.CurriculumPerformance {
+  /* width: 100%; */
+  min-height: 400px;
+  border: 1px solid #DFDFDF;
+  border-radius: 25px;
+  padding: 20px;
+  box-sizing: border-box;
+}

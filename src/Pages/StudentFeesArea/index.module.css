@@ -1,0 +1,61 @@
+.mainPending{
+    border: 1px solid #bdb3b3;
+    padding: 10px;
+    border-radius: 13px;
+}
+
+
+.icons{
+    margin: 5px;
+}
+
+.displayData{
+    display: flex;
+}
+
+.boxContainer{
+    padding: 20px;
+    width: fit-content;
+    border-radius: 20px;
+    border: 1px solid grey;
+    margin-bottom: 20px;
+}
+
+.mr_right{
+    margin-right: 20px;
+}
+
+.arrowContainer{
+    font-size: 28px;
+    color: grey;
+    cursor: pointer;
+}
+
+.textBold{
+    font-weight: 900;
+    font-size: 28px;
+    margin-right: 15px;
+    padding-right: 10px;
+}
+
+.dataRoll{
+    color: #FF9E00;
+    border-right: 4px solid grey;
+}
+
+.dataName{
+    color: #474646;
+}
+
+.displayEditfield{
+    margin : 20px;
+    width: 350px;
+    margin:20px auto;
+    border : 1px solid gray;
+    border-radius: 10px;
+  
+  }
+
+  .mainContainer{
+    padding: 20px;
+}

@@ -1,0 +1,64 @@
+.mainContainer {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-around; */
+    gap: 25px
+}
+
+/* .leftImgCon{
+    width : 20%;
+} */
+
+.InfoCon {
+    margin-left: 4px;
+    padding: 10px 18px;
+}
+
+.mainImgCon {
+    background-image: linear-gradient(to right, #7ed9d9, #3776c5);
+    padding: 6px 30px;
+    display: flex;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.imageCon {
+    background-image: linear-gradient(to right, #7ed9d9, #3776c5);
+    padding: 6px 30px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.mainImage {
+
+    width: 14px;
+    height: 31px;
+}
+
+
+
+
+
+.rightInfocon {
+    display: flex;
+    background-color: rgba(228, 226, 226, 0.8);
+    margin: 10px;
+    border-radius: 5px;
+    width: 40%;
+
+
+}
+
+.title {
+    margin: 0px;
+    color: #216E91;
+}
+
+.desc {
+    margin: 0px;
+    color: rgba(113, 112, 112, 1);
+
+}

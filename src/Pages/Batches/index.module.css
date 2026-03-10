@@ -1,0 +1,271 @@
+.mainBatchLiveContainer {
+  display: flex;
+  width: 100%;
+  padding: 0 1.5%;
+}
+.mainContent {
+  padding: 2%;
+  width: 100%;
+}
+
+.mainLiveContainer {
+  padding: 2%;
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+}
+.liveImg {
+  width: 60px;
+  margin-right: 15px;
+}
+.liveCourse {
+  border-radius: 12px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: white;
+  padding: 15px;
+  /* margin-left: 54px; */
+  margin-bottom: 20px;
+  /* width: 26%; */
+}
+.liveBtn {
+  font-size: 0.75rem !important;
+  padding: 6px 12px !important;
+}
+
+.searchInput {
+  border-radius: 20px !important;
+  background-color: #f0f0f0;
+  height: 2.5rem;
+  border: none;
+  outline: none;
+}
+.batch {
+  display: flex;
+  justify-content: space-between;
+  margin: 2% 0;
+  box-shadow: 1px 3px 7px rgb(170, 165, 165);
+  border-radius: 12px;
+}
+.editBatch {
+  cursor: pointer;
+  margin: auto 0;
+  font-size: 3rem;
+  margin-right: 2%;
+}
+.batchTextContainer {
+  width: 100%;
+  color: #313e6c;
+}
+.batchText {
+  margin: 0;
+}
+.viewBatch {
+  padding: 4% 3%;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 1px 3px 7px rgb(170, 165, 165);
+  margin: 1.2rem 5%;
+}
+.batchStart {
+  display: flex;
+  justify-content: space-between;
+}
+.variantSearch {
+  margin-top: 20px;
+  background-color: #f0f0f0;
+  width: 60%;
+}
+.batchDetails {
+  background-color: #f0f0f0;
+  border-radius: 6px;
+  padding: 0 2% 2%;
+  display: flex;
+}
+.batchType {
+  flex: 1;
+}
+.batchData {
+  flex: 3;
+}
+.batchType h4 {
+  color: #313e6c;
+  margin-bottom: 5px;
+}
+.stud_attend_title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1400px;
+  /* margin: 0 auto; */
+}
+.batchData h4 {
+  font-weight: normal;
+  margin-bottom: 5px;
+}
+.batchDetailsHeader {
+  font-weight: 500;
+  color: #313e6c;
+}
+.student {
+  background-color: white;
+  box-shadow: 1px 3px 7px rgb(170, 165, 165);
+  color: #00008b;
+  padding: 10px;
+  margin: 15px 4rem 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.stdntImg {
+  height: 8rem;
+  width: 8rem;
+  border-radius: 4rem;
+  background-color: #ee9435;
+  margin-left: -4rem;
+  margin-right: 4rem;
+  object-fit: cover;
+}
+
+.batchTitle {
+  font-size: 1.7rem;
+  font-weight: 500;
+  margin: 0 0 10px;
+  color: #313e6c;
+}
+.batchText {
+  font-size: 18px;
+  font-weight: 200;
+}
+.homeBtn {
+  margin-left: 8%;
+  font-size: 30px;
+  cursor: pointer;
+}
+.variantHeader {
+  /* font-size: 1.4rem; */
+  font-weight: 500;
+  color: #ee9435;
+}
+.addVariant {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.variant {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: salmon;
+  color: #fff;
+  border-radius: 6px;
+  /* cursor: pointer; */
+  margin-bottom: 2%;
+}
+.variant h3 {
+  margin: 0;
+}
+.variant p {
+  margin-bottom: 0;
+}
+.variantIcon {
+  font-size: 2.4rem !important;
+  margin-right: 20px;
+  cursor: pointer;
+}
+.variantTitle {
+  color: #313e6c;
+}
+.addStudent {
+  color: #ee9435;
+  font-size: 2.6rem !important;
+  margin-right: 8%;
+  cursor: pointer;
+}
+.variantDetailsHeader {
+  font-weight: 500;
+  color: #777777;
+  font-size: 1rem;
+}
+.variantDays {
+  display: flex;
+  margin-top: 2%;
+}
+.dayCircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 1rem;
+  text-transform: uppercase;
+  margin-left: -5px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+.variantColor {
+  height: 1.8rem;
+  width: 4rem;
+  border-radius: 0.2rem;
+}
+.studentDetails {
+  background-color: #fff;
+  height: 80vh;
+  overflow-y: auto;
+  width: 100%;
+  padding: 2% 0;
+}
+.studentDetails h2 {
+  text-align: center;
+  color: #313e6c;
+}
+.viewAttendance {
+  color: #ee9435;
+  display: flex;
+  justify-content: flex-end;
+}
+.studentsLength {
+  color: #313e6c;
+  margin-right: 5%;
+}
+
+.attendanceDates {
+  display: flex;
+  flex-direction: row-reverse;
+  margin: 1% 2%;
+  overflow: auto;
+  width: 70vw;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+}
+.attendanceDates::-webkit-scrollbar {
+  display: none;
+}
+.attendanceDate {
+  margin: 1.2%;
+  cursor: pointer;
+}
+.attendanceDay {
+  font-size: 20px;
+  font-weight: 700;
+  color: #313e6c;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.attendanceDateText {
+  font-size: 20px;
+  font-weight: bold;
+  color: #313e6c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 5rem;
+  width: 5rem;
+  border-radius: 2.5rem;
+}
+.goBack {
+  font-size: 26px !important;
+  margin-right: 0.3rem;
+  margin-bottom: -0.3rem;
+  cursor: pointer;
+}

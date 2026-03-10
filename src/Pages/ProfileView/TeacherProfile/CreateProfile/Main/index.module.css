@@ -1,0 +1,88 @@
+.mainContainer {
+    display: flex;
+    /* align-items: center; */
+    /* justify-content: space-between; */
+}
+
+
+
+
+
+.editCon{
+    display: flex;
+    justify-content: end;
+
+    }
+    
+    .editItem{
+    text-align: center;
+    width : 120px;
+    padding : 10px;
+    border-radius: 5px ;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    border : none;
+    }
+
+.left{
+    width : 250px;
+
+}
+.right{
+    width : 80%;
+    max-width: 1400px;
+    margin-top: 100px;
+}
+
+
+.mr{
+    margin: 5px 0;
+}
+
+
+.profileInnerContainer {
+    position: relative;
+    width: fit-content;
+}
+
+
+.profileImg {
+    border-radius: 50%;
+    width: 110px;
+    height: 110px;
+}
+
+.camera {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: white;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.BtnContainer{
+width : 225px;
+display: flex;
+align-items: center;
+/* border: 1px solid #216E91; */
+margin-top: 10px;
+border-radius: 5px;
+padding-left: 5px;
+cursor: pointer;
+}
+
+.iconImgCon{
+    margin-right: 4px;
+}
+
+.defaultIcons{
+    width: 20px;
+    margin-right: 10px;
+}
+
+.activeButton{
+    background-color: #216E91;
+    color: white;
+    font-weight: bold;
+}

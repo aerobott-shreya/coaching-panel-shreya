@@ -1,0 +1,20 @@
+.sectionHeading {
+  position: relative;
+  display: inline-block;
+}
+
+.sectionHeading::after {
+  content: "";
+  width: 80px;
+  position: absolute;
+  height: 3px;
+  bottom: -5px;
+  left: 0;
+  background: linear-gradient(97.14deg, #11888a -3.11%, #2a5e95 100%);
+}
+
+.testInnerContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}

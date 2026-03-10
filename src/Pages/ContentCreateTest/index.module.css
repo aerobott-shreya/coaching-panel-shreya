@@ -1,0 +1,44 @@
+.flex_content{
+    display: flex;
+    align-items: center;
+}
+
+.mr_top{
+    margin-top: 30px;
+}
+
+.dataHeader{
+    font-size: 26px;
+}
+
+.arrows{
+    color: #216E91;
+    cursor: pointer;
+}
+
+.sectionBox{
+    padding: 10px;
+    width: 106px;
+    text-align: center;
+    border: 1px solid;
+    margin: 10px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.inputbox{
+    margin: 20px 10px;
+}
+
+.sectionColor{
+    background-color: #216E91;
+    color: white;
+}
+
+.mainContentBox{
+    max-width: 586px;
+    border: 1px solid #e7e7e7;
+    box-shadow: 1px 2px 7px #d3c3c3;
+    margin-top: 40px;
+    padding: 20px;
+}

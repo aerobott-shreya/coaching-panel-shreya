@@ -1,0 +1,98 @@
+.firstContainer{
+    display: flex;
+  justify-content: space-between;
+  
+  }
+  
+  .mainContainer{
+    max-width: 1400px;
+    text-align: center;
+    margin-top: 75px;
+  
+  }
+  
+  .secondContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .thirdContainer{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+
+  }
+  
+  .fourthContainer{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .fifthContainer{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .AgeContainer{
+    margin-right: 30px;
+    width: 30%;
+  }
+  
+  .userNameDetails{
+    width : 30%;
+  } 
+  
+  .cancelandSubmit{
+    display: flex;
+    justify-content: end;
+    gap:20px;
+    margin-top: 20px;
+  }
+  
+  
+  .cancelCon{
+  
+  }
+  .cancelBtn{
+    background-color: white;
+    border : 1px solid #216E91;
+    padding: 10px 25px;
+    border-radius: 5px;
+    color: #216E91;
+  }
+  
+  .btn_style{
+    padding: 10px 25px;
+    border : none;
+    background-color: #216E91;
+    color: white;
+    border-radius: 5px;
+  }
+  
+  
+  .Container{
+    max-width: 1400px;
+  
+  }
+  
+  
+  .mainFamilyCon{
+    max-width: 1400px;
+    display: flex;
+    flex-wrap: wrap;
+  
+  }
+  
+  
+  .useraddressDetails{
+    width : 45%;
+    margin: 10px
+  }
+
+
+  .gradeContainer{
+    margin-top: 10px;
+  }

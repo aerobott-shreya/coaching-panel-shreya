@@ -1,0 +1,49 @@
+.mainContainer{
+display: flex;
+flex-wrap: wrap;
+justify-content: space-around;
+
+}
+
+/* .leftImgCon{
+    width : 20%;
+} */
+
+.InfoCon{
+    margin-left: 4px;
+}
+
+.imageCon{
+    width : 38px;
+    background-color: rgba(251, 155, 95, 1);
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.mainImage{
+    width: 100%;
+}
+
+
+
+
+
+.rightInfocon{
+display: flex;
+background-color:  rgba(228, 226, 226, 0.8);
+margin: 10px;
+border-radius: 5px;
+width : 40%;
+
+
+}
+
+.title{
+ margin: 0px;
+color: rgba(251, 155, 95, 1)
+}
+.desc{
+    margin: 0px;
+    color: rgba(113, 112, 112, 1);
+ 
+}

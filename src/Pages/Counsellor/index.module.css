@@ -1,0 +1,16 @@
+.main_counsellor{
+    display: flex;
+    max-width: 1200px;
+    margin: 20px auto;
+    justify-content: space-around;
+}
+
+.btn_cc{
+    padding: 10px 20px;
+    border: none;
+    background-color: #143268;
+    color: white;
+    font-size: 18px;
+    border-radius: 12px;
+    cursor: pointer;
+}

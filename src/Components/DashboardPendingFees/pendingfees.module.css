@@ -1,0 +1,28 @@
+.pendingFees {
+  /* border: 1px solid black; */
+  width: 100%;
+  padding: 10px;
+}
+
+.divider {
+  border-bottom: 1px solid #c3c3c3;
+}
+
+
+/* globals */
+
+.font22 {
+  font-size: 16px;
+}
+
+
+.imagesContainer {
+  width: 75px;
+}
+
+.images {
+  width: 100%;
+  border-radius: 50%;
+  height: 65px;
+  object-fit: cover;
+}

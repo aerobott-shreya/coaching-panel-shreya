@@ -1,0 +1,29 @@
+.mainSpecial{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 60px;
+}
+
+.mainBox{
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background: #FFFFFF;
+    box-shadow: 4px -4px 4px rgb(0 0 0 / 10%), -4px 4px 4px rgb(0 0 0 / 10%);
+    border-radius: 5px;
+    /* width: 30%; */
+}
+
+
+.image{
+    width: 50px;
+}
+
+.text{
+    color: #717070;
+    font-size: 18px;
+    color: #216E91;
+    white-space: nowrap;
+}

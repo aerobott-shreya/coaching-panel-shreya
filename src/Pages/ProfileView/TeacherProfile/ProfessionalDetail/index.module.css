@@ -1,0 +1,37 @@
+.mainBox{
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 4px 10px rgb(0 0 0 / 10%);
+    border-radius: 20px;
+    padding: 10px 10px 30px;
+    background: white;
+    margin-bottom: 20px;
+}
+
+.textData{
+    font-size: 17px;
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+.addIcons{
+    display: flex;
+    color: #216E91;
+    margin-bottom: 20px;
+    cursor: pointer;
+    width: max-content;
+}
+
+.mainData{
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.boxContent{
+    margin: 10px;
+}
+
+.editIconContainer{
+    margin-left: auto;
+    text-align: right;
+}

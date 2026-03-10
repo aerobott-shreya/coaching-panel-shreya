@@ -1,0 +1,126 @@
+.headerTitle {
+  display: flex;
+}
+
+.head{
+  font-size: 25px;
+}
+
+.title {
+  margin: 5px;
+  font-weight: 500;
+  font-size: 20px;
+  color: #484848;
+}
+
+.cardContainer{
+  display: flex;
+  align-items: center;
+}
+
+.imageContainer{
+  width: 100px;
+}
+
+.mainImage{
+  width: 100%;
+}
+
+.container{
+  padding: 10px;
+  box-shadow: 2px 2px 6px rgb(177 172 172);
+  margin: 10px;
+  border-radius: 15px;
+  background: white;
+  cursor: pointer;
+}
+
+.subtitle {
+  font-weight: 500;
+  font-size: 18px;
+  margin: 0px;
+  color: #484848;
+}
+
+.assignment {
+
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+
+}
+
+.iconStyles {
+  color: #216E91;
+}
+
+.assign_data{
+  display: flex;
+  justify-content: space-between;
+}
+
+.assignmentList{
+  box-shadow: 0px 0px 7px rgb(0 0 0 / 29%);
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.fontTitle{
+  font-size: 24px;
+}
+
+.questionData{
+  display: flex;
+  font-size: 17px;
+}
+
+.questionData > div{
+  margin: 10px;
+  color: grey;
+}
+
+.questionData > div:first-child{
+  margin-right: 0;
+  margin-left: 0;
+  padding-right: 10px;
+  border-right: 2px solid grey;
+}
+
+.subAssignment{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.iconContainer{
+  margin-right: 20px;
+}
+
+.infoHeader {
+  font-weight: 500;
+  font-size: 18px;
+
+}
+
+.textColor {
+  color: rgba(0, 0, 0, 0.25);
+
+}
+
+.infoflexCon {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 20px;
+  padding: 0px 10px;
+}
+
+.arrowBack{
+  width: max-content;
+  display: flex;
+  margin: 20px 0;
+  color: #216E91;
+  cursor: pointer;
+}

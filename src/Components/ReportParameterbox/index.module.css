@@ -1,0 +1,70 @@
+.boxContainer {
+  width: 45%;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 20px;
+}
+
+.textimageTop {
+  /* border-bottom: 1px dashed #000; */
+  font-size: 26px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  color: #fff;
+}
+
+.listContainer {
+  list-style: none;
+  /* width: 100px; */
+  margin: auto;
+  /* padding: 0; */
+  text-align: left;
+}
+
+.listText {
+  list-style-type: disc;
+  padding: 0;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 500;
+  white-space: nowrap;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.listText::after {
+  position: absolute;
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50px;
+  background: #fff;
+  left: -25px;
+  top: 12px;
+}
+
+@media only screen and (max-width: 768px) and (min-width: 320px) {
+  .boxContainer {
+    width: 100%;
+    overflow: hidden;
+    padding: 20px 0;
+  }
+
+  .textimageTop {
+    font-size: 22px;
+    /* gap: 5px; */
+
+    & img {
+      width: 27px;
+    }
+  }
+
+  .listText {
+    font-size: 20px;
+  }
+}

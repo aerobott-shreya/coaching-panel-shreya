@@ -1,0 +1,21 @@
+.mainBox {
+    display: flex;
+    align-items: center;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px rgb(0 0 0 / 25%);
+    border-radius: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.content{
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+.text{
+    font-size: 20px;
+    margin: 0 10px;
+    color: rgba(0, 0, 0, 0.5);
+}

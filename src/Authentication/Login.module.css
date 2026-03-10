@@ -1,0 +1,127 @@
+.loginPageContainer {
+    position: relative;
+    min-height: 100vh;
+}
+
+.leftFloatImage {
+    position: relative;
+    left: 0;
+    width: 20%;
+}
+
+.rightFloatImage {
+    position: absolute;
+    right: 0;
+    bottom: 0px;
+    width: 60%;
+}
+
+.loginForm {
+    border-radius: 15px;
+    width: 70vw;
+    position: absolute;
+    min-height: 65vh;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    z-index: 9;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+.loginForm>div {
+    width: 50%;
+}
+
+.loginLeftSection {
+    background: #216E91;
+    width: 100%;
+    position: relative;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+
+}
+
+.loginRightSection {
+    background-color: rgba(255, 255, 255, 0.733);
+    height: 100%;
+    width: 100%;
+    position: relative;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.ranveerImage {
+    /* position: absolute;
+    height: 108%;
+    bottom: 0%;
+    z-index: 99;
+    border-bottom-left-radius: 15px; */
+
+
+        /* position: absolute; */
+        width: 99%;
+        /* height: 103%; */
+        padding: 22px 20px 6px;
+        box-sizing: border-box;
+        /* bottom: 0%; */
+        /* z-index: 99; */
+        border-bottom-left-radius: 15px;
+}
+
+.formTitle {}
+
+.inputForm {
+    padding: 0px 10%;
+}
+
+.formTitle {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 38px;
+
+}
+
+.formDescp {
+    font-size: 18px;
+    line-height: 28px;
+
+}
+
+.forgotPassword {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    cursor: pointer;
+    margin:10px 0px 25px 0px
+}
+
+.authFormContainer{
+    margin:40px 0px 80px;
+}
+
+.leftContainerA{
+    margin:40px 0px;
+}
+
+
+.otpInputField {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    margin: auto;
+    margin-top: 50px;
+  }
+  
+  .otpInputField input {
+    outline: none;
+    border: none;
+    border-bottom: 1px solid grey;
+    padding: 8px 5px;
+    font-size: 20px;
+    width: 30px;
+    text-align: center;
+  }
+  

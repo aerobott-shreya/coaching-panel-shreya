@@ -1,0 +1,391 @@
+import React, { useContext, useState, useEffect } from 'react'
+import { Button, Checkbox, Switch, TextField } from '@mui/material';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+import EditorCms from '../../Components/EditorCms/EditorCms'
+import { api_token } from '../../Utils/Network';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import styles from './index.module.css';
+import { UserCredsContext } from '../../ContextApi/UserCredsContext/UserCredsContext';
+
+// import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
+function NewAccord({ access, data, index,questionID, getQuestion = () => {}, setQuestionList = () => { }, id }) {
+    const [newbox, setNkewData] = useState({
+        // tags_id: data?.tags?.id || null,
+        // provider: 1,
+        // title: "",
+        // marks: "",
+        // complexity: null,
+        // question_type: "1",
+        // negative_marks: 0,
+        // is_active: true,
+        // subjective_choices: [{
+        //     solution: "",
+        // }],
+        // objective_choices: [
+        //     {
+        //         title: "",
+        //         is_correct_answer: false,
+        //     },
+        //     {
+        //         title: "",
+        //         is_correct_answer: false,
+        //     },
+        //     {
+        //         title: "",
+        //         is_correct_answer: false,
+        //     },
+        //     {
+        //         title: "",
+        //         is_correct_answer: false,
+        //     }
+        // ]
+
+        taxonomy: data?.taxonomy[0] || null,
+      provider: 1,
+      title: "",
+      positive_marks: "",
+      complexity: null,
+      question_type: "1",
+      negative_marks: 0,
+      is_active: true,
+      subjectives: "",
+      avg_time_to_solve: "00:01:00",
+      subjective_choices: [{
+        solution: "",
+      }],
+      choices: [
+        {
+          title: "",
+          is_correct_answer: false,
+        },
+        {
+          title: "",
+          is_correct_answer: false,
+        },
+        {
+          title: "",
+          is_correct_answer: false,
+        },
+        {
+          title: "",
+          is_correct_answer: false,
+        }
+      ]
+    });
+    const [taxonomy, setTaxonomy] = useState([]);
+    const [questionType, setQuestionType] = useState(false);
+  const { sectionList, content_selection, tagList } = useContext(UserCredsContext);
+
+    const [expanded, setExpanded] = useState(true); // state to control the expanded state of the accordion items
+
+
+    useEffect(() => {
+        // getTaxonomy();
+        setNkewData({ ...newbox, ...data })
+        if (data.question_type === 2) {
+            setQuestionType(true);
+        }
+    }, []);
+
+
+    const handleChange = (event) => {
+        if (event.target.checked === false) {
+            setNkewData({
+                ...newbox,
+                objective_choices: [
+                    {
+                        title: "",
+                        is_correct_answer: false,
+                    },
+                    {
+                        title: "",
+                        is_correct_answer: false,
+                    },
+                    {
+                        title: "",
+                        is_correct_answer: false,
+                    },
+                    {
+                        title: "",
+                        is_correct_answer: false,
+                    }
+                ]
+            })
+        }
+        setQuestionType(event.target.checked);
+    };
+
+    const getTaxonomy = () => {
+        api_token
+            .get(`base/v1/tags`)
+            .then((res) => {
+                setTaxonomy(res.data.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+
+    const handleData = (e) => {
+        // debugger;
+
+        const { name, value } = e.target;
+        let data = {
+            ...newbox,
+            [name]: value
+        }
+        setNkewData(data);
+    }
+
+    const handleDataChange = (content, name) => {
+        if(name == "subjective_choices"){
+            newbox.subjective_choices[0].solution = content;
+        }else{
+            newbox[name] = content;
+        }
+        setNkewData(newbox)
+    }
+
+    const handleCheckData = (e, ds, j) => {
+        // debugger;
+        let data = ds.choices.findIndex((v) => {
+            return v.is_correct_answer === true;
+        })
+        if (data !== -1) {
+            newbox.choices[data].is_correct_answer = !e.target.checked;
+            setNkewData({ ...newbox })
+        }
+        ds.choices.map((v, i) => {
+            const haskey = "explanation" in newbox.choices[i];
+            if (haskey) {
+                delete newbox.choices[i].explanation;
+                delete newbox.choices[i].explanation;
+            }
+        })
+        newbox.choices[j].is_correct_answer = e.target.checked;
+        setNkewData({ ...newbox })
+    }
+
+    const handleOptionChange = (content, index) => {
+        newbox.choices[index].title = content;
+        setNkewData(newbox)
+    }
+
+
+    const handleOptionExplain = (content, ds, index) => {
+        newbox.choices[index].explanation = content;
+        setNkewData(newbox)
+    }
+
+    const submitData = () => {
+        let data = [{ ...newbox }];
+        if (questionType) {
+            data[0].question_type = 2;
+            delete data[0].choices;
+        } else {
+            data[0].question_type = 1;
+            delete data[0].subjective_choices;
+        }
+
+        const newData = data.map((v,i) => {
+            if(v?.taxonomy){
+              data[i].taxonomy = [+v.taxonomy]
+            }
+          })
+
+        console.log(data, "NNNNNN")
+
+        api_token
+        .patch(`content/questions/${questionID}/`, data[0])
+        .then((res) => {
+          console.log(res.data.data);
+          if (res.data.data) {
+            // setQuestionList(res.data.data)
+            getQuestion();
+            alert("Question Updated Successfully")
+                    setExpanded(false);
+          }
+        })
+        .catch(err => console.log(err));
+        // api_token
+        //     .patch(`cms/v1/test/${id}/`, { question: data })
+        //     .then((res) => {
+        //         // console.log(res.data.data);
+        //         if (res.data.data) {
+        //             setQuestionList(res.data.data.question)
+        //             alert("Question Updated Successfully")
+        //             setExpanded(false);
+        //         }
+        //     })
+        //     .catch(err => console.log(err));
+    }
+
+    console.log(data, "dddddddddsss")
+    return (
+        <div>
+            <Accordion sx={{ marginBottom: '10px' }} 
+            // expanded={expanded}
+            >
+                <AccordionSummary
+                    // expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                >
+                    <Typography>
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <div style={{ display: 'flex', alignItem: 'flex-start' }}>
+                                <div style={{ margin: '3px', fontWeight: 'bold' }}>{`Question ${index + 1} : `}</div>
+                                <div dangerouslySetInnerHTML={{ __html: data?.title }} className={styles.modules}></div>
+                            </div>
+                            <div style={{ display: 'flex', alignItem: 'flex-start', marginLeft: '30px' }}>
+                                <div style={{ marginRight: '30px', whiteSpace: 'nowrap' }}>Marks: {data?.positive_marks}</div>
+                                {/* <div style={{ marginRight: '30px', whiteSpace: 'nowrap' }}>Negative Marks: {data?.negative_marks}</div> */}
+                                {/* <div style={{ marginRight: '30px', whiteSpace: 'nowrap' }}>Taxonomy: {data?.tags?.title}</div> */}
+                                <div style={{ marginRight: '30px', whiteSpace: 'nowrap' }}>Difficulty Level: {(data.complexity == 1) ? `Easy` : (data.complexity == 2) ? "Medium" : `Hard`}</div>
+                            </div>
+                        </div>
+
+                    </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Typography>
+                        <div>
+                            {/* <div style={{ display: 'flex', alignItem: 'center' }}>
+                                <p>Objective</p>
+
+                                <Switch
+                                    checked={questionType}
+                                    onChange={handleChange}
+                                    inputProps={{ 'aria-label': 'controlled' }}
+                                />
+                                <p>Subjective</p>
+                            </div> */}
+
+                            <div style={{ display: 'flex' }}>
+
+                                <div style={{ marginRight: '20px' }}>
+                                    <TextField label="Marks" name="positive_marks"
+                                        value={newbox?.positive_marks}
+                                        onChange={(e) => handleData(e)}
+                                    /></div>
+                                <div>
+                                    <TextField label="Negative marks"
+                                        name="negative_marks"
+                                        value={newbox?.negative_marks}
+                                        onChange={(e) => handleData(e)}
+                                    /></div>
+
+                                <div style={{ margin: '0 30px' }}>
+
+                                    <FormControl>
+                                        <FormLabel id="demo-row-radio-buttons-group-label">Difficulty Level</FormLabel>
+                                        <RadioGroup
+                                            row
+                                            aria-labelledby="demo-row-radio-buttons-group-label"
+                                            name="complexity"
+                                            value={newbox?.complexity}
+                                        onChange={(e) => handleData(e)}
+                                        >
+                                            <FormControlLabel value="1" control={<Radio />} label="Easy" />
+                                            <FormControlLabel value="2" control={<Radio />} label="Medium" />
+                                            <FormControlLabel value="3" control={<Radio />} label="Hard" />
+                                        </RadioGroup>
+                                    </FormControl>
+                                </div>
+
+
+                            </div>
+
+                            <div>
+                                <FormControl>
+                                    <FormLabel id="demo-row-radio-buttons-group-label">Taxonomy</FormLabel>
+                                    <RadioGroup
+                                        row
+                                        aria-labelledby="demo-row-radio-buttons-group-label"
+                                        name="taxonomy"
+                                        value={`${newbox?.taxonomy}`}
+                                        onChange={(e) => handleData(e)}
+                                    >
+                                        {tagList && tagList.map((v, i) => (<FormControlLabel value={`${v.id}`} control={<Radio />} label={v.title} key={i}/>))}
+                                    </RadioGroup>
+                                </FormControl>
+                            </div>
+
+                            <p>Question Title</p>
+                            <EditorCms
+                                height={500}
+                                question={newbox?.title}
+                                onChange={(content) => handleDataChange(content, "title")}
+                            />
+
+                            {questionType ? <>
+                                <div>
+                                    <p>Answer</p>
+                                    <EditorCms
+                                        height={250}
+                                        question={newbox.subjective_choices[0]?.solution}
+                                        onChange={(content) => handleDataChange(content, "subjective_choices")}
+                                    // onChange={(content, editor) => {
+                                    //   // handleDataChange(content, i, "value")dashboard_img;
+                                    //   handleOptionChange(content, v, i, j)
+                                    // }}
+                                    />
+                                </div>
+                            </>
+                                :
+                                <>
+
+                                    {newbox?.choices?.map((content, j) => (
+                                        <>
+                                            <p>Option {j + 1} <Checkbox checked={content.is_correct_answer}
+                                                onChange={(e) => handleCheckData(e, newbox, j)}
+                                            /> </p>
+                                            <div>
+                                                <EditorCms
+                                                    height={300}
+                                                    question={content.title}
+                                                    onChange={(content) => handleOptionChange(content, j)}
+                                                />
+                                            </div>
+
+
+                                            {content.is_correct_answer && <div>
+                                                <p>Explaination</p>
+                                                <div>
+                                                    <EditorCms
+                                                        height={250}
+                                                        question={content.explanation}
+                                                        onChange={(content) => handleOptionExplain(content, newbox, j)}
+                                                    // onChange={(content) => handleOptionExplain(content, v, i, j)}
+                                                    // onChange={(content, editor) => {
+                                                    //   // handleDataChange(content, i, "value");
+                                                    //   handleOptionChange(content, v, i, j)
+                                                    // }}
+                                                    />
+                                                </div>
+                                            </div>}
+                                        </>
+
+                                    ))}
+                                </>}
+
+                            {/* <Button onClick={() => submitData()} variant="contained" style={{margin: '20px'}} 
+                            // disabled={!access.updateAccess}
+                            >Save Question</Button> */}
+                        </div>
+                    </Typography>
+                </AccordionDetails>
+            </Accordion>
+        </div>
+    )
+}
+
+export default NewAccord

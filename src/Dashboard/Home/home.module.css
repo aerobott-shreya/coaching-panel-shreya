@@ -1,0 +1,41 @@
+.dashboardRSection{
+    padding:0px 20px;
+    position:relative;
+    z-index: 9;
+}
+
+.drawerOptions{
+    display: flex;
+}
+
+.topImage{
+    position: absolute;
+    top:0px;
+    width:55vw
+}
+
+
+.topLeft{
+    position: absolute;
+    right: 0px;
+    top:0px;
+    width:50vw
+
+}
+
+.bottomRight{
+    position:fixed;
+    bottom:0px;
+    right: 0px;
+    width:50vw
+}
+
+.logoImage{
+    /* width:20%; */
+}
+
+.logoName{
+    font-size: 22px;
+    font-weight: 800;
+    margin:0px
+}

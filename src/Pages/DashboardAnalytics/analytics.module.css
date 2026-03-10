@@ -1,0 +1,118 @@
+.container {
+  /* border: 1px solid red; */
+  /* width: 100%; */
+  display: flex;
+  flex-direction: column;
+  /* background-color: white; */
+  margin-bottom: 60px;
+}
+
+/* topbarstyles */
+
+.center {
+  /* border: 1px solid coral; */
+  height: auto;
+  padding: 30px;
+  margin-bottom: 30px;
+  /* display: none; */
+}
+
+.centerMain {
+  display: flex;
+  flex-direction: row;
+  gap: 4%;
+}
+
+.chartBox {
+  /* border: 1px solid black; */
+  padding: 10px;
+  width: 50%;
+}
+
+.chartMain {
+  /* width: 95%; */
+  /* border: 1px solid black; */
+  margin: auto;
+}
+
+.label {
+  width: 10px;
+  height: 10px;
+  /* background-color: crimson; */
+  border-radius: 50%;
+}
+
+.flexIndex{
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+/* .cardDescription{
+    display: flex;
+    flex-direction: column;
+    padding-left: 15px;
+  }
+   */
+
+.bottomSection {
+  /* border: 1px solid rgb(0, 248, 174); */
+  height: auto;
+  /* padding: 30px; */
+  padding-left: 25px;
+  padding-right: 25px;
+  /* display: none; */
+}
+
+.bottomSectionMain {
+  display: flex;
+  flex-direction: row;
+  gap: 4%;
+}
+
+/* .pendingFees{
+    border: 1px solid black;
+    width: 50%;
+    padding: 10px;
+  
+  } */
+
+.eventCalender {
+  /* border: 1px solid saddlebrown; */
+  width: 100%;
+  padding: 10px;
+}
+
+.reactCalender {
+  width: 100% !important;
+  border: none !important;
+}
+
+.analyticsHeader{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+
+.flexDiv{
+  width:49%;
+  margin-bottom: 20px;
+}
+
+.nameData{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.birthDayBox{
+  margin: 20px;
+  text-align: center;
+}
+
+.imgAvt{
+  width: 63px !important;
+  border-radius: 50% !important;
+  height: 65px !important;
+  object-fit: cover;
+}

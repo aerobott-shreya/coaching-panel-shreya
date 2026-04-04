@@ -47,6 +47,13 @@ function FormFields({ type, handleSubmit, ...props }) {
 
     const onSubmit = async (e) => {
         e.preventDefault();
+
+        // Prevent normal login flow logic if this is a forgot password attempt
+        if (type === FORGOT_PASSWORD) {
+            console.warn("OTP Verification Needs Implementation");
+            return;
+        }
+
         dispatch({ type: "login" })
         const data = {
             "username": username,
@@ -77,8 +84,30 @@ function FormFields({ type, handleSubmit, ...props }) {
         navigate(`/${_url}`)
     }
 
-    const handleOtp = () => {
-        dispatch({ type: 'toggleotp' });
+    const handleOtp = async (e) => {
+        // Prevent form submission which tries to incorrectly log the user in
+        e.preventDefault();
+
+        try {
+            const data = { username: username };
+
+            // TODO: Please replace with the correct OTP generation API endpoint here
+            const response = await api_open.post('/auth/user/generate_otp/', data);
+
+            console.log(response, "OTP Generation Response");
+
+            // The API returns 200 OK even if the user isn't found, so we must check the application-level status
+            if (response.data && response.data.data && response.data.data.status === false) {
+                console.log("Backend rejected OTP generation:", response.data.data.message);
+                dispatch({ type: 'field', fieldName: 'error', payload: response.data.data.message });
+                return;
+            }
+
+            dispatch({ type: 'toggleotp' });
+        } catch (err) {
+            console.log("Failed to send OTP:", err);
+            dispatch({ type: 'field', fieldName: 'error', payload: 'Failed to send OTP (Network error)' });
+        }
     }
 
     const userForm = () => {
@@ -89,9 +118,11 @@ function FormFields({ type, handleSubmit, ...props }) {
                     <div>
                         <InputField style={{ background: 'white', width: "100%", marginBottom: '15px' }} label="Username" value={username} placeholder="username" name="username" onChange={handleChange} size="normal" type="text" error={error === "" ? false : true} />
                     </div>
-                    <div style={{ width: "100%" }}>
-                        <InputField style={{ background: 'white', width: "100%", marginBottom: '15px' }} label="Password" value={password} placeholder="password" name="password" onChange={handleChange} size="normal" type="password" error={error === "" ? false : true} />
-                    </div>
+                    {type === LOGIN && (
+                        <div style={{ width: "100%" }}>
+                            <InputField style={{ background: 'white', width: "100%", marginBottom: '15px' }} label="Password" value={password} placeholder="password" name="password" onChange={handleChange} size="normal" type="password" error={error === "" ? false : true} />
+                        </div>
+                    )}
                     <p style={{ fontSize: "14px", color: "red" }}>{error} &nbsp;</p>
 
                     {type === LOGIN &&
@@ -105,7 +136,7 @@ function FormFields({ type, handleSubmit, ...props }) {
                         (<>
                             <p className={styles.forgotPassword} style={{ color: "#9CCFCF" }} onClick={() => handleRoute(LOGIN)}>Back to login</p>
                             <br />
-                            <Button type='submit' size="large" style={{ width: "100%" }} variant="contained" onClick={handleOtp}>Get OTP</Button>
+                            <Button type='button' size="large" style={{ width: "100%" }} variant="contained" onClick={handleOtp}>Get OTP</Button>
                         </>)
                     }
                 </form>

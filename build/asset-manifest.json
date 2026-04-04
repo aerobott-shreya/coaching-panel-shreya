@@ -1,8 +1,22 @@
 {
   "files": {
-    "main.css": "/static/css/main.a0c755cb.css",
-    "main.js": "/static/js/main.521e6aac.js",
-    "static/js/787.530e0f8f.chunk.js": "/static/js/787.530e0f8f.chunk.js",
+    "main.css": "/static/css/main.7ec23a95.css",
+    "main.js": "/static/js/main.86eb032a.js",
+    "reactPlayerYouTube.js": "/static/js/reactPlayerYouTube.72e6211d.chunk.js",
+    "reactPlayerSoundCloud.js": "/static/js/reactPlayerSoundCloud.6e016470.chunk.js",
+    "reactPlayerVimeo.js": "/static/js/reactPlayerVimeo.39fc69b6.chunk.js",
+    "reactPlayerMux.js": "/static/js/reactPlayerMux.6d3202f7.chunk.js",
+    "reactPlayerFacebook.js": "/static/js/reactPlayerFacebook.bdb25ead.chunk.js",
+    "reactPlayerStreamable.js": "/static/js/reactPlayerStreamable.454076ac.chunk.js",
+    "reactPlayerWistia.js": "/static/js/reactPlayerWistia.ba3dd58d.chunk.js",
+    "reactPlayerTwitch.js": "/static/js/reactPlayerTwitch.58a151b2.chunk.js",
+    "reactPlayerDailyMotion.js": "/static/js/reactPlayerDailyMotion.8782942d.chunk.js",
+    "reactPlayerMixcloud.js": "/static/js/reactPlayerMixcloud.77e26d67.chunk.js",
+    "reactPlayerVidyard.js": "/static/js/reactPlayerVidyard.b054992b.chunk.js",
+    "reactPlayerKaltura.js": "/static/js/reactPlayerKaltura.96576c9f.chunk.js",
+    "reactPlayerFilePlayer.js": "/static/js/reactPlayerFilePlayer.54073c9e.chunk.js",
+    "reactPlayerPreview.js": "/static/js/reactPlayerPreview.8a185649.chunk.js",
+    "static/js/453.fd5231b9.chunk.js": "/static/js/453.fd5231b9.chunk.js",
     "static/media/Management Process & Organizational Behavior.pdf": "/static/media/Management Process & Organizational Behavior.860ab9ffb33b02f05200.pdf",
     "static/media/rightlogin.png": "/static/media/rightlogin.0a246281e6172673bcb1.png",
     "static/media/tri_right.png": "/static/media/tri_right.b0bab708a4eb4babe0bf.png",
@@ -37,12 +51,26 @@
     "static/media/mindmap.xlsx": "/static/media/mindmap.f160483460c7e4a63ce0.xlsx",
     "static/media/pen.svg": "/static/media/pen.27ec406e0b4ccd1bb499a0432c66afe2.svg",
     "index.html": "/index.html",
-    "main.a0c755cb.css.map": "/static/css/main.a0c755cb.css.map",
-    "main.521e6aac.js.map": "/static/js/main.521e6aac.js.map",
-    "787.530e0f8f.chunk.js.map": "/static/js/787.530e0f8f.chunk.js.map"
+    "main.7ec23a95.css.map": "/static/css/main.7ec23a95.css.map",
+    "main.86eb032a.js.map": "/static/js/main.86eb032a.js.map",
+    "reactPlayerYouTube.72e6211d.chunk.js.map": "/static/js/reactPlayerYouTube.72e6211d.chunk.js.map",
+    "reactPlayerSoundCloud.6e016470.chunk.js.map": "/static/js/reactPlayerSoundCloud.6e016470.chunk.js.map",
+    "reactPlayerVimeo.39fc69b6.chunk.js.map": "/static/js/reactPlayerVimeo.39fc69b6.chunk.js.map",
+    "reactPlayerMux.6d3202f7.chunk.js.map": "/static/js/reactPlayerMux.6d3202f7.chunk.js.map",
+    "reactPlayerFacebook.bdb25ead.chunk.js.map": "/static/js/reactPlayerFacebook.bdb25ead.chunk.js.map",
+    "reactPlayerStreamable.454076ac.chunk.js.map": "/static/js/reactPlayerStreamable.454076ac.chunk.js.map",
+    "reactPlayerWistia.ba3dd58d.chunk.js.map": "/static/js/reactPlayerWistia.ba3dd58d.chunk.js.map",
+    "reactPlayerTwitch.58a151b2.chunk.js.map": "/static/js/reactPlayerTwitch.58a151b2.chunk.js.map",
+    "reactPlayerDailyMotion.8782942d.chunk.js.map": "/static/js/reactPlayerDailyMotion.8782942d.chunk.js.map",
+    "reactPlayerMixcloud.77e26d67.chunk.js.map": "/static/js/reactPlayerMixcloud.77e26d67.chunk.js.map",
+    "reactPlayerVidyard.b054992b.chunk.js.map": "/static/js/reactPlayerVidyard.b054992b.chunk.js.map",
+    "reactPlayerKaltura.96576c9f.chunk.js.map": "/static/js/reactPlayerKaltura.96576c9f.chunk.js.map",
+    "reactPlayerFilePlayer.54073c9e.chunk.js.map": "/static/js/reactPlayerFilePlayer.54073c9e.chunk.js.map",
+    "reactPlayerPreview.8a185649.chunk.js.map": "/static/js/reactPlayerPreview.8a185649.chunk.js.map",
+    "453.fd5231b9.chunk.js.map": "/static/js/453.fd5231b9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a0c755cb.css",
-    "static/js/main.521e6aac.js"
+    "static/css/main.7ec23a95.css",
+    "static/js/main.86eb032a.js"
   ]
 }

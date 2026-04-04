@@ -2,6 +2,7 @@ import Checkbox from "@mui/material/Checkbox";
 import { Button, Switch, TextField } from "@mui/material";
 import React, { useContext, useState, useEffect } from "react";
 import EditorCms from "../../Components/EditorCms/EditorCms";
+import MCQQuestionForm from "../../Components/MCQQuestionForm/MCQQuestionForm";
 import Accord from "./Accord";
 import {
   Navigate,
@@ -540,83 +541,8 @@ function ContentTestAddQuestion({ access }) {
               </FormControl>
             </div>
 
-            <p>Question Title</p>
-            <EditorCms
-              height={350}
-              onChange={(content) => handleDataChange(content, i, "title")}
-            />
-
-            {questionType ? (
-              <>
-                <div>
-                  <p>Answer</p>
-                  <EditorCms
-                    height={250}
-                    onChange={(content) =>
-                      handleDataChange(content, i, "subjective")
-                    }
-                    // onChange={(content, editor) => {
-                    //   // handleDataChange(content, i, "value");
-                    //   handleOptionChange(content, v, i, j)
-                    // }}
-                  />
-                </div>
-              </>
-            ) : (
-              <>
-                {v?.choices?.map((content, j) => (
-                  <>
-                    <p>
-                      Option {j + 1}{" "}
-                      <Checkbox
-                        checked={content.is_correct_answer}
-                        onChange={(e) => handleCheckData(e, v, i, j)}
-                      />{" "}
-                    </p>
-                    <div>
-                      <EditorCms
-                        height={250}
-                        onChange={(content) =>
-                          handleOptionChange(content, v, i, j)
-                        }
-                        // onChange={(content, editor) => {
-                        //   // handleDataChange(content, i, "value");
-                        //   handleOptionChange(content, v, i, j)
-                        // }}
-                      />
-                    </div>
-
-                    {content.is_correct_answer && (
-                      <div>
-                        <p>Explaination</p>
-                        <div>
-                          <EditorCms
-                            height={250}
-                            onChange={(content) =>
-                              handleOptionExplain(content, v, i, j)
-                            }
-                            // onChange={(content, editor) => {
-                            //   // handleDataChange(content, i, "value");
-                            //   handleOptionChange(content, v, i, j)
-                            // }}
-                          />
-                        </div>
-                      </div>
-                    )}
-                  </>
-                ))}
-              </>
-            )}
-
-            <Button
-              onClick={() => saveQuestion()}
-              variant="contained"
-              style={{ margin: "20px" }}
-
-              // disabled={!access.updateAccess}
-            >
-              Save Question
-            </Button>
+            {/* Professional MCQ Question Builder */}
+            <MCQQuestionForm />
           </div>
         ))}
 

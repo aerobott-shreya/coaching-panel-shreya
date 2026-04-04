@@ -47,6 +47,6 @@ export function checkObjectValues(obj) {
       }
     }
     return true;
-  }
-
-
+  }export function stripHtml(html) {
+  return html ? html.replace(/<[^>]*>?/gm, "") : "";
+}

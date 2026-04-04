@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { Button, Checkbox, Switch, TextField } from '@mui/material';
+import { Box, Button, Checkbox, Switch, TextField } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -13,6 +13,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import styles from './index.module.css';
 import { UserCredsContext } from '../../ContextApi/UserCredsContext/UserCredsContext';
+import { stripHtml } from '../../Utils/Utils';
 
 // import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
@@ -320,10 +321,12 @@ function NewAccord({ access, data, index,questionID, getQuestion = () => {}, set
                             </div>
 
                             <p>Question Title</p>
-                            <EditorCms
-                                height={500}
-                                question={newbox?.title}
-                                onChange={(content) => handleDataChange(content, "title")}
+                            <TextField
+                                fullWidth
+                                multiline
+                                rows={3}
+                                value={stripHtml(newbox?.title)}
+                                onChange={(e) => handleDataChange(e.target.value, "title")}
                             />
 
                             {questionType ? <>
@@ -344,36 +347,61 @@ function NewAccord({ access, data, index,questionID, getQuestion = () => {}, set
                                 <>
 
                                     {newbox?.choices?.map((content, j) => (
-                                        <>
-                                            <p>Option {j + 1} <Checkbox checked={content.is_correct_answer}
-                                                onChange={(e) => handleCheckData(e, newbox, j)}
-                                            /> </p>
-                                            <div>
-                                                <EditorCms
-                                                    height={300}
-                                                    question={content.title}
-                                                    onChange={(content) => handleOptionChange(content, j)}
+                                        <Box 
+                                            key={j} 
+                                            sx={{ 
+                                                display: "flex", 
+                                                alignItems: "flex-start", 
+                                                mb: 2, 
+                                                p: 2, 
+                                                border: "1px solid #e0e0e0", 
+                                                borderRadius: 2,
+                                                backgroundColor: content.is_correct_answer ? "#f0f7ff" : "transparent",
+                                                borderColor: content.is_correct_answer ? "#1976d2" : "#e0e0e0",
+                                                transition: "all 0.2s ease-in-out",
+                                                "&:hover": {
+                                                    borderColor: "#1976d2",
+                                                    boxShadow: "0 2px 8px rgba(0,0,0,0.1)"
+                                                }
+                                            }}
+                                        >
+                                            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", mt: 1 }}>
+                                                <Radio
+                                                    checked={content.is_correct_answer}
+                                                    onChange={(e) => handleCheckData(e, newbox, j)}
+                                                    value={j}
+                                                    name={`correct-answer-${index}`}
+                                                    sx={{ p: 0.5 }}
                                                 />
-                                            </div>
+                                                <Typography variant="caption" sx={{ fontWeight: "bold", color: "#666" }}>
+                                                    {String.fromCharCode(65 + j)}
+                                                </Typography>
+                                            </Box>
+                                            
+                                            <Box sx={{ flexGrow: 1, ml: 2 }}>
+                                                <TextField
+                                                    fullWidth
+                                                    label={`Option ${String.fromCharCode(65 + j)}`}
+                                                    variant="outlined"
+                                                    value={stripHtml(content.title)}
+                                                    onChange={(e) => handleOptionChange(e.target.value, j)}
+                                                    size="small"
+                                                />
 
-
-                                            {content.is_correct_answer && <div>
-                                                <p>Explaination</p>
-                                                <div>
-                                                    <EditorCms
-                                                        height={250}
-                                                        question={content.explanation}
-                                                        onChange={(content) => handleOptionExplain(content, newbox, j)}
-                                                    // onChange={(content) => handleOptionExplain(content, v, i, j)}
-                                                    // onChange={(content, editor) => {
-                                                    //   // handleDataChange(content, i, "value");
-                                                    //   handleOptionChange(content, v, i, j)
-                                                    // }}
-                                                    />
-                                                </div>
-                                            </div>}
-                                        </>
-
+                                                {content.is_correct_answer && (
+                                                    <Box sx={{ mt: 2 }}>
+                                                        <Typography variant="subtitle2" sx={{ mb: 1, fontWeight: "600", color: "#1976d2" }}>
+                                                            Explanation
+                                                        </Typography>
+                                                        <EditorCms
+                                                            height={200}
+                                                            question={content.explanation}
+                                                            onChange={(content) => handleOptionExplain(content, newbox, j)}
+                                                        />
+                                                    </Box>
+                                                )}
+                                            </Box>
+                                        </Box>
                                     ))}
                                 </>}
 

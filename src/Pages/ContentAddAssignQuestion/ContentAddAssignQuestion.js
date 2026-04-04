@@ -3,6 +3,7 @@ import Checkbox from "@mui/material/Checkbox";
 import { Button, Switch, TextField } from "@mui/material";
 import React, { useContext, useState, useEffect } from "react";
 import EditorCms from "../../Components/EditorCms/EditorCms";
+import MCQQuestionForm from "../../Components/MCQQuestionForm/MCQQuestionForm";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { api_token } from "../../Utils/Network";
 import Radio from "@mui/material/Radio";
@@ -210,37 +211,8 @@ function ContentAddAssignQuestion({ access }) {
 
       {currentQuestion.map((v, i) => (
         <div key={i} className={styles.mainBox}>
-
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <p>Objective</p>
-            <Switch checked={questionType} onChange={handleChange} />
-            <p>Subjective</p>
-          </div>
-
-          <TextField
-            label="Marks"
-            name="marks"
-            onChange={(e) => handleData(e, i)}
-          />
-
-          <p>Question Title</p>
-
-          <EditorCms
-            height={350}
-            onChange={(content) =>
-              handleDataChange(content, i, "title")
-            }
-          />
-
-          <Button
-            onClick={saveQuestion}
-            variant="contained"
-            style={{ margin: "20px" }}
-            disabled={!access.updateAccess}
-          >
-            Save Question
-          </Button>
-
+          {/* Professional MCQ Question Builder */}
+          <MCQQuestionForm />
         </div>
       ))}
 

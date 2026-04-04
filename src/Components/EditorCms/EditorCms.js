@@ -1,14 +1,17 @@
 import React from "react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+import { TextField } from "@mui/material";
 
-const EditorCms = ({ value, onChange }) => {
+const EditorCms = ({ value, onChange, label = "Enter text" }) => {
   return (
-    <ReactQuill
-      theme="snow"
+    <TextField
+      fullWidth
+      multiline
+      rows={4}
+      label={label}
       value={value}
-      onChange={onChange}
-      style={{ height: "200px", marginBottom: "50px" }}
+      onChange={(e) => onChange(e.target.value)}
+      variant="outlined"
+      margin="normal"
     />
   );
 };

@@ -99,7 +99,7 @@ function ContentDIYS({ access }) {
     };
   
     const goToCreateAssignment = (vals) => {
-      navigate(`/dashboard/content/doityourself/addQuestion/${vals.id}`, { state: vals });
+      navigate(`/dashboard/content/doityourself/viewTest/${vals.id}`, { state: vals });
     };
   
     console.log(assignList, "assignList");

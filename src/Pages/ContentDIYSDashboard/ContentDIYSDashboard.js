@@ -10,7 +10,7 @@ function ContentDIYSDashboard({access}) {
       <Routes>
         <Route strict exact path="doityourselflist" element={<ContentDIYS access={access}/>} />
         <Route strict exact path='doityourselfcreateTest' element={<ContentDIYSCreateTest />} />
-        <Route strict exact path="addQuestion/:id" element={<ContentDIYSAddQuestion access={access} />} /> 
+        <Route strict exact path="viewTest/:id" element={<ContentDIYSAddQuestion access={access} />} /> 
       </Routes>
     </div>
   )

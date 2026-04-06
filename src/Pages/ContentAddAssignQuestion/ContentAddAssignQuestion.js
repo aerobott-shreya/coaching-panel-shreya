@@ -137,9 +137,13 @@ function ContentAddAssignQuestion({ access }) {
       delete data[0].subjectives;
     }
 
+    const hasCorrectAns = data[0].question_type === 1 
+      ? data[0].objective_choices?.some(choice => choice.is_correct)
+      : true;
+
     const checks = checkEmptyObject(data[0]);
 
-    if (checks) {
+    if (checks && hasCorrectAns) {
       api_token
         .patch(`cms/v1/assignment/${id}/`, { question: data })
         .then((res) => {
@@ -149,6 +153,8 @@ function ContentAddAssignQuestion({ access }) {
           }
         })
         .catch(console.log);
+    } else if (!hasCorrectAns) {
+        alert("Please mark at least one option as the correct answer.");
     } else {
       alert("Field should not be empty");
     }
@@ -173,20 +179,20 @@ function ContentAddAssignQuestion({ access }) {
       <div className={styles.TotalCount}>
         <div>
           <div className={styles.QuestionTitle}>
-            <div className={styles.titles}>{showDetail?.title}</div>
-            <p>- {showDetail?.description}</p>
+            <div className={styles.titles}>{showDetail?.title?.replace("✏️", "")?.trim()}</div>
+            {showDetail?.description && showDetail?.description !== showDetail?.title && (
+              <p> - {showDetail?.description}</p>
+            )}
           </div>
           <div>Total Marks : {showDetail?.total_marks}</div>
         </div>
 
         <div>
           <div style={{ textAlign: "right" }}>
-            {access?.updateAccess && (
-              <EditIcon onClick={() => setOpenDialog(true)} />
-            )}
+            {/* View only screen, no edit icon */}
           </div>
 
-          <div style={{ fontSize: "19px" }}>
+          <div style={{ fontSize: "0.95rem", fontWeight: "600", color: "#64748b" }}>
             Duration: {`${hours}:${minutes}:${seconds}`}
           </div>
         </div>
@@ -204,26 +210,13 @@ function ContentAddAssignQuestion({ access }) {
               setQuestionList={setQuestionList}
               id={id}
               access={access}
+              getQuestion={getQuestion}
             />
           ))
         )}
       </Stack>
 
-      {currentQuestion.map((v, i) => (
-        <div key={i} className={styles.mainBox}>
-          {/* Professional MCQ Question Builder */}
-          <MCQQuestionForm />
-        </div>
-      ))}
 
-      <Button
-        onClick={CreateQuestion}
-        variant="contained"
-        style={{ marginTop: "20px" }}
-        disabled={!access.updateAccess}
-      >
-        Add Question
-      </Button>
 
       <DialogBox
         open={openDialog}

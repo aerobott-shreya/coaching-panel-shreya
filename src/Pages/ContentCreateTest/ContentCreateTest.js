@@ -98,7 +98,7 @@ function ContentCreateTest() {
     }
 
     const MoveToQuestion = () => {
-        navigate(`/dashboard/content/test/addQuestion/${location?.state?.id}`, {state: location?.state, pageData: 1})
+        navigate(`/dashboard/content/test/viewTest/${location?.state?.id}`, {state: location?.state, pageData: 1})
     }
 
     const submitData = () => {
@@ -136,7 +136,7 @@ function ContentCreateTest() {
 
                     if (res.data.data) {
                         const { id } = res.data.data;
-                        navigate(`/dashboard/content/test/addQuestion/${id}`, {state: res.data.data})
+                        navigate(`/dashboard/content/test/viewTest/${id}`, {state: res.data.data})
                     }
                 })
                 .catch(err => console.log(err))

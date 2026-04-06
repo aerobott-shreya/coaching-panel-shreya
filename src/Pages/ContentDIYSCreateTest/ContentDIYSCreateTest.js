@@ -102,7 +102,7 @@ function ContentDIYSCreateTest() {
   const MoveToQuestion = () => {
 
     navigate(
-      `/dashboard/content/doityourself/addQuestion/${location?.state?.id}`,
+      `/dashboard/content/doityourself/viewTest/${location?.state?.id}`,
       { state: location?.state }
     );
 
@@ -141,7 +141,7 @@ function ContentDIYSCreateTest() {
 
           const { id } = res.data.data;
 
-          navigate(`/dashboard/content/doityourself/addQuestion/${id}`, {
+          navigate(`/dashboard/content/doityourself/viewTest/${id}`, {
             state: res.data.data
           });
 

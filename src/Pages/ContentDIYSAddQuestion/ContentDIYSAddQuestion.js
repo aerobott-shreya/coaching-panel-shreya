@@ -195,8 +195,10 @@ function ContentDIYSAddQuestion({ access }) {
 
         <div>
           <div className={styles.QuestionTitle}>
-            <div className={styles.titles}>{showDetail?.title}</div>
-            <p> - {showDetail?.description}</p>
+            <div className={styles.titles}>{showDetail?.title?.replace("✏️", "")?.trim()}</div>
+            {showDetail?.description && showDetail?.description !== showDetail?.title && (
+              <p> - {showDetail?.description}</p>
+            )}
           </div>
 
           <div>Total Marks : {showDetail?.total_marks}</div>
@@ -204,10 +206,10 @@ function ContentDIYSAddQuestion({ access }) {
 
         <div>
           <div style={{ textAlign: "right" }}>
-            {access?.updateAccess && <EditIcon onClick={handlepop} />}
+            {/* View only screen, no edit icon */}
           </div>
 
-          <div style={{ fontSize: "19px" }}>
+          <div style={{ fontSize: "0.95rem", fontWeight: "600", color: "#64748b" }}>
             Duration: {showDetail?.duration}
           </div>
         </div>
@@ -227,6 +229,7 @@ function ContentDIYSAddQuestion({ access }) {
               setQuestionList={setQuestionList}
               id={id}
               access={access}
+              getQuestion={getQuestion}
             />
           ))
         )}

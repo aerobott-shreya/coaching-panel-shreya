@@ -10,7 +10,7 @@ function ContentTestDashboard({access}) {
         <Routes>
             <Route strict exact path="testList" element={<ContentTest access={access} />} />
             <Route strict exact path="createTest" element={<ContentCreateTest />} />
-            <Route strict exact path="addQuestion/:id" element={<ContentTestAddQuestion access={access}/>} /> 
+            <Route strict exact path="viewTest/:id" element={<ContentTestAddQuestion access={access}/>} /> 
         </Routes>
     </div>
   )

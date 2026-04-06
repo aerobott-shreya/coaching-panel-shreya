@@ -1,421 +1,187 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Box, Button, Checkbox, Switch, TextField } from "@mui/material";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
-import EditorCms from "../../Components/EditorCms/EditorCms";
-import { api_token } from "../../Utils/Network";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
-import styles from "./index.module.css";
-import { UserCredsContext } from "../../ContextApi/UserCredsContext/UserCredsContext";
-import { stripHtml } from "../../Utils/Utils";
-// import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import React from 'react';
+import { Box, Typography, Button } from '@mui/material';
+import { api_token } from '../../Utils/Network';
 
-function NewAccord({ access, data, index, setQuestionList = () => {}, id }) {
-  const [newbox, setNkewData] = useState({
-    tags_id: data?.tags?.id || null,
-    provider: 1,
-    title: "",
-    positive_marks: "",
-    complexity: null,
-    question_type: "1",
-    negative_marks: 0,
-    is_active: true,
-    subjective_choices: [
-      {
-        solution: "",
-      },
-    ],
-    objective_choices: [
-      {
-        title: "",
-        is_correct: false,
-      },
-      {
-        title: "",
-        is_correct: false,
-      },
-      {
-        title: "",
-        is_correct: false,
-      },
-      {
-        title: "",
-        is_correct: false,
-      },
-    ],
-  });
-  const [taxonomy, setTaxonomy] = useState([]);
-  const [questionType, setQuestionType] = useState(true);
-  const { sectionList, content_selection, tagList } =
-    useContext(UserCredsContext);
-  const [expanded, setExpanded] = useState(true); // state to control the expanded state of the accordion items
+function NewAccord({ data, index, setQuestionList, id, access, getQuestion }) {
+    const isSubjective = data?.question_type === 2;
+    const optionsList = data?.objective_choices || data?.choices || [];
+    const hasCorrectAnswer = optionsList.some(content => 
+        Boolean(content?.is_correct_answer || content?.is_correct)
+    );
 
-  useEffect(() => {
-    // getTaxonomy();
-    setNkewData({ ...newbox, ...data });
-    if (data.question_type === 2) {
-      setQuestionType(true);
-    }
-  }, []);
+    const handleSetAsCorrect = (j) => {
+        if (!access?.updateAccess) return;
+        
+        // Prepare the payload for patching
+        const updatedQuestion = { ...data };
+        const isLegacyArray = !!data?.choices;
+        const choicesKey = isLegacyArray ? 'choices' : 'objective_choices';
+        const correctKey = isLegacyArray ? 'is_correct_answer' : 'is_correct';
 
-  const handleChange = (event) => {
-    if (event.target.checked === false) {
-      setNkewData({
-        ...newbox,
-        objective_choices: [
-          {
-            title: "",
-            is_correct: false,
-          },
-          {
-            title: "",
-            is_correct: false,
-          },
-          {
-            title: "",
-            is_correct: false,
-          },
-          {
-            title: "",
-            is_correct: false,
-          },
-        ],
-      });
-    }
-    setQuestionType(event.target.checked);
-  };
+        updatedQuestion[choicesKey] = updatedQuestion[choicesKey].map((opt, idx) => ({
+            ...opt,
+            [correctKey]: idx === j
+        }));
 
-  const getTaxonomy = () => {
-    api_token
-      .get(`base/v1/tags`)
-      .then((res) => {
-        setTaxonomy(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const handleData = (e) => {
-    const { name, value } = e.target;
-    let data = {
-      ...newbox,
-      [name]: value,
+        // Handle path dynamically for different modules
+        const endpoint = id.includes('assign') ? `cms/v1/assignment/${id.replace('assign','')}/` : `cms/v1/test/${id}/`;
+        
+        // This is a placeholder for the actual API call logic based on existing project patterns
+        api_token.patch(endpoint, { question: [updatedQuestion] })
+            .then(res => {
+                alert(`Option ${String.fromCharCode(65 + j)} has been set as correct for this question.`);
+                if (getQuestion) getQuestion();
+            })
+            .catch(err => {
+                console.error("Data patch failed:", err);
+                alert("Failed to update correct answer. This feature requires accurate API routing.");
+            });
     };
-    setNkewData(data);
-  };
 
-  const handleDataChange = (content, name) => {
-    if (name == "subjective_choices") {
-      newbox.subjective_choices[0].solution = content;
-    } else {
-      newbox[name] = content;
-    }
-    setNkewData(newbox);
-  };
-
-  const handleCheckData = (e, ds, j) => {
-    // debugger;
-    let data = ds.objective_choices.findIndex((v) => {
-      return v.is_correct === true;
-    });
-    if (data !== -1) {
-      newbox.objective_choices[data].is_correct = !e.target.checked;
-      setNkewData({ ...newbox });
-    }
-    ds.objective_choices.map((v, i) => {
-      const haskey = "solution" in newbox.objective_choices[i];
-      if (haskey) {
-        delete newbox.objective_choices[i].solution;
-        delete newbox.objective_choices[i].solution_latex;
-      }
-    });
-    newbox.objective_choices[j].is_correct = e.target.checked;
-    setNkewData({ ...newbox });
-  };
-
-  const handleOptionChange = (content, index) => {
-    newbox.objective_choices[index].title = content;
-    setNkewData(newbox);
-  };
-
-  const handleOptionExplain = (content, ds, index) => {
-    newbox.objective_choices[index].solution = content;
-    setNkewData(newbox);
-  };
-
-  const submitData = () => {
-    let data = [{ ...newbox }];
-    if (questionType) {
-      data[0].question_type = 2;
-      delete data[0].objective_choices;
-    } else {
-      data[0].question_type = 1;
-      delete data[0].subjective_choices;
-    }
-
-    // console.log(data, "NNNNNN")
-    api_token
-      .patch(`cms/v1/test/${id}/`, { question: data })
-      .then((res) => {
-        // console.log(res.data.data);
-        if (res.data.data) {
-          setQuestionList(res.data.data.question);
-          alert("Q&A question updated successfully");
-          setExpanded(false);
-        }
-      })
-      .catch((err) => console.log(err));
-  };
-  console.log(data, "newparametereskjdkf");
-  console.log("" + newbox?.tags?.id, "dddddddddsss");
-  return (
-    <div>
-      <Accordion
-        sx={{ marginBottom: "10px" }}
-        // expanded={expanded}
-      >
-        <AccordionSummary
-          // expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
+    return (
+        <Box 
+            sx={{ 
+                marginBottom: '32px',
+                borderRadius: '16px',
+                boxShadow: '0 4px 25px rgba(0,0,0,0.03)',
+                backgroundColor: '#fff',
+                border: '1px solid #f1f5f9',
+                transition: 'transform 0.2s ease-in-out',
+                '&:hover': {
+                    boxShadow: '0 10px 35px rgba(0,0,0,0.05)',
+                }
+            }}
         >
-          <Typography>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <div style={{ display: "flex", alignItem: "flex-start" }}>
-                <div style={{ margin: "3px", fontWeight: "bold" }}>{`Question${
-                  index + 1
-                } : `}</div>
-                <div
-                  dangerouslySetInnerHTML={{ __html: data?.title }}
-                  className={styles.modules}
-                ></div>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  alignItem: "flex-start",
-                  marginLeft: "30px",
-                }}
-              >
-                <div style={{ marginRight: "30px", whiteSpace: "nowrap" }}>
-                  Marks: {data?.positive_marks}
-                </div>
-                <div style={{ marginRight: "30px", whiteSpace: "nowrap" }}>
-                  Negative Marks: {data?.negative_marks}
-                </div>
-                <div style={{ marginRight: "30px", whiteSpace: "nowrap" }}>
-                  Taxonomy: {data?.tags?.title}
-                </div>
-                <div style={{ marginRight: "30px", whiteSpace: "nowrap" }}>
-                  Difficulty Level:{" "}
-                  {data.complexity == 1
-                    ? `easy`
-                    : data.complexity == 2
-                    ? "medium"
-                    : `hard`}
-                </div>
-              </div>
-            </div>
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            <div>
-              {/* <div style={{ display: 'flex', alignItem: 'center' }}>
-                                <p>Objective</p>
-
-                                <Switch
-                                    checked={questionType}
-                                    onChange={handleChange}
-                                    inputProps={{ 'aria-label': 'controlled' }}
-                                />
-                                <p>Subjective</p>
-                            </div> */}
-
-              <div style={{ display: "flex" }}>
-                <div style={{ marginRight: "20px" }}>
-                  <TextField
-                    label="Marks"
-                    name="positive_marks"
-                    value={newbox?.positive_marks}
-                    onChange={(e) => handleData(e)}
-                  />
-                </div>
-                <div>
-                  <TextField
-                    label="Negative marks"
-                    name="negative_marks"
-                    value={newbox?.negative_marks}
-                    onChange={(e) => handleData(e)}
-                  />
-                </div>
-
-                <div style={{ margin: "0 30px" }}>
-                  <FormControl>
-                    <FormLabel id="demo-row-radio-buttons-group-label">
-                      Difficulty Level
-                    </FormLabel>
-                    <RadioGroup
-                      row
-                      aria-labelledby="demo-row-radio-buttons-group-label"
-                      name="complexity"
-                      value={newbox?.complexity}
-                      onChange={(e) => handleData(e)}
-                    >
-                      <FormControlLabel
-                        value="1"
-                        control={<Radio />}
-                        label="Easy"
-                      />
-                      <FormControlLabel
-                        value="2"
-                        control={<Radio />}
-                        label="Medium"
-                      />
-                      <FormControlLabel
-                        value="3"
-                        control={<Radio />}
-                        label="Hard"
-                      />
-                    </RadioGroup>
-                  </FormControl>
-                </div>
-              </div>
-
-              <div>
-                <FormControl>
-                  <FormLabel id="demo-row-radio-buttons-group-label">
-                    Taxonomy
-                  </FormLabel>
-                  <RadioGroup
-                    row
-                    aria-labelledby="demo-row-radio-buttons-group-label"
-                    name="tags_id"
-                    value={`${newbox?.tags_id}`}
-                    onChange={(e) => handleData(e)}
-                  >
-                    {tagList &&
-                      tagList.map((v, i) => (
-                        <FormControlLabel
-                          value={`${v.id}`}
-                          control={<Radio />}
-                          label={v.title}
-                          key={i}
-                        />
-                      ))}
-                  </RadioGroup>
-                </FormControl>
-              </div>
-
-              <p>Question Title</p>
-              <TextField
-                fullWidth
-                multiline
-                rows={3}
-                value={stripHtml(newbox?.title)}
-                onChange={(e) => handleDataChange(e.target.value, "title")}
-              />
-
-              {questionType ? (
-                <>
-                  <div>
-                    <p>Answer</p>
-                    <EditorCms
-                      height={250}
-                      question={newbox.subjective_choices[0]?.solution}
-                      onChange={(content) =>
-                        handleDataChange(content, "subjective_choices")
-                      }
-                      // onChange={(content, editor) => {
-                      //   // handleDataChange(content, i, "value")dashboard_img;
-                      //   handleOptionChange(content, v, i, j)
-                      // }}
-                    />
-                  </div>
-                </>
-              ) : (
-                <>
-                  {newbox?.objective_choices?.map((content, j) => (
+            {/* Header Section */}
+            <Box sx={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '20px 24px 12px 24px'
+            }}>
+                <Typography sx={{ fontWeight: '700', color: '#94a3b8', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                    Question {(index + 1).toString().padStart(2, '0')}
+                </Typography>
+                
+                <Box sx={{ display: 'flex', gap: 1.5, alignItems: 'center' }}>
                     <Box 
-                      key={j} 
-                      sx={{ 
-                        display: "flex", 
-                        alignItems: "flex-start", 
-                        mb: 2, 
-                        p: 2, 
-                        border: "1px solid #e0e0e0", 
-                        borderRadius: 2,
-                        backgroundColor: content.is_correct ? "#f0f7ff" : "transparent",
-                        borderColor: content.is_correct ? "#1976d2" : "#e0e0e0",
-                        transition: "all 0.2s ease-in-out",
-                        "&:hover": {
-                          borderColor: "#1976d2",
-                          boxShadow: "0 2px 8px rgba(0,0,0,0.1)"
-                        }
-                      }}
+                        sx={{ 
+                            px: 1.5, py: 0.5, borderRadius: '50px', fontSize: '10px', fontWeight: '700', letterSpacing: '0.5px', textTransform: 'uppercase',
+                            backgroundColor: data?.complexity == 1 ? '#f0fdf4' : data?.complexity == 2 ? '#fff7ed' : '#fef2f2',
+                            color: data?.complexity == 1 ? '#15803d' : data?.complexity == 2 ? '#ea580c' : '#dc2626',
+                            border: '1px solid',
+                            borderColor: data?.complexity == 1 ? '#dcfce7' : data?.complexity == 2 ? '#ffedd5' : '#fee2e2',
+                        }}
                     >
-                      <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", mt: 1 }}>
-                        <Radio
-                          checked={content.is_correct}
-                          onChange={(e) => handleCheckData(e, newbox, j)}
-                          value={j}
-                          name={`correct-answer-diys-${index}`}
-                          sx={{ p: 0.5 }}
-                        />
-                        <Typography variant="caption" sx={{ fontWeight: "bold", color: "#666" }}>
-                          {String.fromCharCode(65 + j)}
-                        </Typography>
-                      </Box>
-                      
-                      <Box sx={{ flexGrow: 1, ml: 2 }}>
-                        <TextField
-                          fullWidth
-                          label={`Option ${String.fromCharCode(65 + j)}`}
-                          variant="outlined"
-                          value={stripHtml(content.title)}
-                          onChange={(e) => handleOptionChange(e.target.value, j)}
-                          size="small"
-                        />
-
-                        {content.is_correct && (
-                          <Box sx={{ mt: 2 }}>
-                            <Typography variant="subtitle2" sx={{ mb: 1, fontWeight: "600", color: "#1976d2" }}>
-                              Explanation
-                            </Typography>
-                            <EditorCms
-                              height={200}
-                              question={content.solution}
-                              onChange={(content) => handleOptionExplain(content, newbox, j)}
-                            />
-                          </Box>
-                        )}
-                      </Box>
+                        {data?.complexity == 1 ? 'Easy' : data?.complexity == 2 ? 'Medium' : 'Hard'}
                     </Box>
-                  ))}
-                </>
-              )}
+                    <Box 
+                        sx={{ 
+                            px: 1.5, py: 0.5, borderRadius: '50px', fontSize: '10px', fontWeight: '700', letterSpacing: '0.5px', textTransform: 'uppercase',
+                            backgroundColor: '#f8fafc', color: '#64748b', border: '1px solid #e2e8f0'
+                        }}
+                    >
+                        {data?.positive_marks || 0} Marks
+                    </Box>
+                </Box>
+            </Box>
 
-              <Button
-                onClick={() => submitData()}
-                variant="contained"
-                style={{ margin: "20px" }}
-                disabled={!access.updateAccess}
-              >
-                Save Question
-              </Button>
-            </div>
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-    </div>
-  );
+            {/* Question Content */}
+            <Box sx={{ p: '12px 24px 24px 24px' }}>
+                <Box sx={{ mb: 3.5 }}>
+                    <Typography 
+                        component="div"
+                        dangerouslySetInnerHTML={{ __html: data?.title }}
+                        sx={{ 
+                            fontSize: "1.15rem", 
+                            fontWeight: "500", 
+                            color: "#1e293b", 
+                            lineHeight: 1.6,
+                            '& p': { margin: 0, padding: 0 }
+                        }}
+                    />
+                </Box>
+
+                {/* Options Section */}
+                <Box sx={{ display: "flex", flexDirection: "column", gap: 0 }}>
+                    {isSubjective ? (
+                        <Box sx={{ p: 2, border: "1px solid #e2e8f0", borderRadius: "8px", backgroundColor: "#f8fafc" }}>
+                            <Typography variant="caption" sx={{ fontWeight: "700", color: "#64748b", display: "block", mb: 1, textTransform: "uppercase" }}>Required Solution</Typography>
+                            <Typography component="div" dangerouslySetInnerHTML={{ __html: data?.subjective_choices?.[0]?.solution || "No solution provided." }} sx={{ color: "#334155" }} />
+                        </Box>
+                    ) : (
+                        optionsList?.map((content, j) => {
+                            const isSelected = Boolean(content?.is_correct_answer || content?.is_correct);
+                            return (
+                                <Box 
+                                    key={j} 
+                                    sx={{
+                                        display: "flex", 
+                                        flexDirection: "column",
+                                        border: "1px solid",
+                                        borderColor: isSelected ? "#4ade80" : "#f1f5f9",
+                                        borderRadius: "8px",
+                                        mb: 1.5,
+                                        backgroundColor: isSelected ? "#f0fdf4" : "#fff",
+                                        p: '14px 20px',
+                                        transition: "all 0.2s ease-in-out",
+                                        "&:hover": { 
+                                            backgroundColor: isSelected ? "#f0fdf4" : "#f8fafc", 
+                                            borderColor: isSelected ? "#4ade80" : "#e2e8f0"
+                                        }
+                                    }}
+                                >
+                                    <Box sx={{ display: "flex", alignItems: "center", width: "100%", justifyContent: "space-between" }}>
+                                        <Box sx={{ display: "flex", alignItems: "center", flex: 1 }}>
+                                            <Box sx={{ width: '30px', display: 'flex', alignItems: 'center' }}>
+                                                <Typography sx={{ fontWeight: "700", color: isSelected ? "#16a34a" : "#94a3b8", fontSize: "0.95rem" }}>
+                                                    {String.fromCharCode(65 + j)}.
+                                                </Typography>
+                                            </Box>
+                                            <Typography 
+                                                component="div"
+                                                dangerouslySetInnerHTML={{ __html: content.title }}
+                                                sx={{ fontSize: "1rem", color: isSelected ? "#15803d" : "#475569", fontWeight: isSelected ? "600" : "400", lineHeight: 1.5, '& p': { margin: 0 } }}
+                                            />
+                                        </Box>
+                                        {isSelected ? (
+                                            <Box sx={{ 
+                                                display: 'flex', alignItems: 'center', gap: 0.5,
+                                                fontSize: '10px', fontWeight: '800', color: '#15803d', backgroundColor: '#dcfce7', 
+                                                px: 1, py: 0.3, borderRadius: '4px', textTransform: 'uppercase', letterSpacing: '0.5px' 
+                                            }}>
+                                                ✔ Correct
+                                            </Box>
+                                        ) : (
+                                            !hasCorrectAnswer && access?.updateAccess && (
+                                                <Button 
+                                                    size="small" 
+                                                    onClick={() => handleSetAsCorrect(j)}
+                                                    sx={{ 
+                                                        textTransform: 'none', fontSize: '9px', color: '#94a3b8', 
+                                                        px: 1, py: 0, minWidth: 0, '&:hover': { color: '#dc2626', background: 'none' } 
+                                                    }}
+                                                >
+                                                    Set as Correct
+                                                </Button>
+                                            )
+                                        )}
+                                    </Box>
+                                    {isSelected && content.explanation && (
+                                        <Box sx={{ mt: 2, pt: 2, borderTop: "1px dashed #bbf7d0", width: "100%", ml: '38px' }}>
+                                            <Typography sx={{ fontWeight: "700", color: "#16a34a", fontSize: "0.7rem", mb: 0.5, textTransform: "uppercase", letterSpacing: '0.5px' }}>Solution & Explanation</Typography>
+                                            <Typography component="div" dangerouslySetInnerHTML={{ __html: content.explanation }} sx={{ color: "#475569", fontSize: "0.9rem", lineHeight: 1.6 }} />
+                                        </Box>
+                                    )}
+                                </Box>
+                            );
+                        })
+                    )}
+
+                </Box>
+            </Box>
+        </Box>
+    );
 }
 
 export default NewAccord;

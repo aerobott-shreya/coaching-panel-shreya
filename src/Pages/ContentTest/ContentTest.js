@@ -100,7 +100,7 @@ function ContentTest({ access }) {
   };
 
   const goToCreateAssignment = (vals) => {
-    navigate(`/dashboard/content/test/addQuestion/${vals.id}`, { state: vals });
+    navigate(`/dashboard/content/test/viewTest/${vals.id}`, { state: vals });
   };
 
   console.log(testData, "TestData");

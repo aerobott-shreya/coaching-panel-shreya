@@ -237,8 +237,12 @@ function ContentTestAddQuestion({ access }) {
 
     console.log(datas, "Datasssssssss");
 
+    const hasCorrectAns = datas[0].question_type === 1 
+      ? datas[0].choices?.some(choice => choice.is_correct_answer)
+      : true;
+
     const checks = checkEmptyObject(datas[0]);
-    if (checks) {
+    if (checks && hasCorrectAns) {
       api_token
         .post(`content/questions/`, datas[0])
         .then((res) => {
@@ -286,6 +290,8 @@ function ContentTestAddQuestion({ access }) {
           }
         })
         .catch((err) => console.log(err));
+    } else if (!hasCorrectAns) {
+        alert("Please mark at least one option as the correct answer.");
     } else {
       alert("Field should not be empty");
     }
@@ -408,24 +414,22 @@ function ContentTestAddQuestion({ access }) {
       <div className={styles.TotalCount}>
         <div>
           <div className={styles.QuestionTitle}>
-            <div className={styles.titles}>{showDetail?.title}</div>
-            <p> - {showDetail?.description}</p>
+            <div className={styles.titles}>{showDetail?.title?.replace("✏️", "")?.trim()}</div>
+            {showDetail?.description && showDetail?.description !== showDetail?.title && (
+              <p> - {showDetail?.description}</p>
+            )}
           </div>
           <div>Total Marks : {showDetail?.total_marks}</div>
         </div>
         <div>
           <div style={{ textAlign: "right" }}>
-            {access?.updateAccess && <EditIcon onClick={() => handlepop()} />}
+            {/* View only screen, no edit icon */}
           </div>
-          <div style={{ fontSize: "19px" }}>
-            {/* Duration: {`${hours}:${minutes}:${remainingSeconds}`} */}
+          <div style={{ fontSize: "0.95rem", fontWeight: "600", color: "#64748b" }}>
             Duration: {showDetail?.duration}
           </div>
         </div>
       </div>
-      {/* <div style={{ textAlign: "right" }}>
-        <Button className={styles.btns}>Assign To</Button>
-      </div> */}
       {/* 
       {
         questionList.length && [...questionList].reverse().map((v, i) => (
@@ -455,96 +459,7 @@ function ContentTestAddQuestion({ access }) {
       </Stack>
 
       {/* <Accord data={questionList} setQuestionList={setQuestionList} /> */}
-      {show === false &&
-        currentQuestion.length > 0 &&
-        currentQuestion.map((v, i) => (
-          <div className={styles.mainBox}>
-            {/* <div style={{ display: 'flex', alignItem: 'center' }}>
-            <p>Objective</p>
-            <Switch
-              checked={questionType}
-              onChange={handleChange}
-              inputProps={{ 'aria-label': 'controlled' }}
-            />
-            <p>Subjective</p>
-          </div> */}
 
-            <div style={{ display: "flex" }}>
-              <div style={{ marginRight: "20px" }}>
-                <TextField
-                  label="Marks"
-                  name="positive_marks"
-                  onChange={(e) => handleData(e, i)}
-                />
-              </div>
-              <div>
-                <TextField
-                  label="Negative marks"
-                  name="negative_marks"
-                  onChange={(e) => handleData(e, i)}
-                />
-              </div>
-
-              <div style={{ margin: "0 30px" }}>
-                <FormControl>
-                  <FormLabel id="demo-row-radio-buttons-group-label">
-                    Difficulty Level
-                  </FormLabel>
-                  <RadioGroup
-                    row
-                    aria-labelledby="demo-row-radio-buttons-group-label"
-                    name="complexity"
-                    onChange={(e) => handleData(e, i)}
-                  >
-                    <FormControlLabel
-                      value="1"
-                      control={<Radio />}
-                      label="Easy"
-                    />
-                    <FormControlLabel
-                      value="2"
-                      control={<Radio />}
-                      label="Medium"
-                    />
-                    <FormControlLabel
-                      value="3"
-                      control={<Radio />}
-                      label="Hard"
-                    />
-                  </RadioGroup>
-                </FormControl>
-              </div>
-            </div>
-
-            <div>
-              <FormControl>
-                <FormLabel id="demo-row-radio-buttons-group-label">
-                  Taxonomy
-                </FormLabel>
-                <RadioGroup
-                  row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="taxonomy"
-                  onChange={(e) => handleData(e, i)}
-                >
-                  {tagList &&
-                    tagList.map((v, i) => (
-                      <FormControlLabel
-                        value={v.id}
-                        control={<Radio />}
-                        label={v.title}
-                      />
-                    ))}
-                  {/* <FormControlLabel value="2" control={<Radio />} label="Medium" />
-                  <FormControlLabel value="3" control={<Radio />} label="Hard" /> */}
-                </RadioGroup>
-              </FormControl>
-            </div>
-
-            {/* Professional MCQ Question Builder */}
-            <MCQQuestionForm />
-          </div>
-        ))}
 
       {questionList.length <= 0 && <p>No Question</p>}
 
